@@ -1,0 +1,48 @@
+<form [formGroup]="registrationForm" #formDir="ngForm">
+  <div fxLayout="column" fxLayoutGap="10px">
+    <div>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" required />
+        <mat-error *ngIf="email.hasError('required')">
+          Email is required
+        </mat-error>
+        <mat-error *ngIf="email.hasError('email')">
+          Email is not a valid email address
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" required />
+        <mat-error *ngIf="password.hasError('required')">
+          Password is required
+        </mat-error>
+        <mat-error *ngIf="!password.hasError('required') && password.hasError('minlength')">
+          Password length must be at least 8 characters long
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Confirm Password</mat-label>
+        <input matInput type="password" formControlName="confirmPassword" required [errorStateMatcher]="passwordConfirmationErrorMatcher" />
+        <mat-error *ngIf="confirmPassword.hasError('required') && !registrationForm.hasError('passwordConfirmationFailed')">
+          Password confirmation is required
+        </mat-error>
+        <mat-error *ngIf="registrationForm.hasError('passwordConfirmationFailed')">
+          Password confirmation doesn't match password
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-raised-button color="accent" (click)="register()">
+        Register
+        <span class="icon">
+          <i class="fas fa-user-plus"></i>
+        </span>
+      </button>
+    </div>
+  </div>
+</form>

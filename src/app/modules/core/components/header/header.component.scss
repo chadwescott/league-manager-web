@@ -1,0 +1,21 @@
+@import '../../../../../assets/scss/variables.scss';
+
+.mat-headline {
+  color: $primary-color;
+}
+
+.label {
+  padding-left: $default-padding;
+  padding-right: $default-padding;
+  font-size: 18px;
+}
+
+mat-toolbar {
+  height: 30px;
+  background-color: $primary-color;
+  color: white;
+}
+
+mat-toolbar button .icon {
+  font-size: 20px;
+}
