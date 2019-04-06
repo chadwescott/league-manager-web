@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "print-on-demand": {
+    "league-manager": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/print-on-demand",
+            "outputPath": "dist/league-manager",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,19 +61,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "print-on-demand:build",
+            "browserTarget": "league-manager:build",
             "port": 625
           },
           "configurations": {
             "production": {
-              "browserTarget": "print-on-demand:build:production"
+              "browserTarget": "league-manager:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "print-on-demand:build"
+            "browserTarget": "league-manager:build"
           }
         },
         "test": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "print-on-demand-e2e": {
+    "league-manager-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -116,11 +116,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "print-on-demand:serve"
+            "devServerTarget": "league-manager:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "print-on-demand:serve:production"
+              "devServerTarget": "league-manager:serve:production"
             }
           }
         },
@@ -136,5 +136,5 @@
       }
     }
   },
-  "defaultProject": "print-on-demand"
+  "defaultProject": "league-manager"
 }
