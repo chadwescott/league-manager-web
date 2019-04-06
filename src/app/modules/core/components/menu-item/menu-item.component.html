@@ -1,0 +1,12 @@
+<mat-card (click)="menuData.action()">
+  <mat-card-content>
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
+      <div class="icon">
+        <i class="{{menuData.iconClass}}"></i>
+      </div>
+      <div class="label">
+        {{menuData.text}}
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
