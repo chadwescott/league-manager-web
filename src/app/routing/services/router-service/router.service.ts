@@ -26,6 +26,10 @@ export class RouterService {
     this.changePage('');
   }
 
+  public showLeagues() {
+    this.changePage('leagues');
+  }
+
   public showSignIn() {
     this.changePage('sign-in');
   }

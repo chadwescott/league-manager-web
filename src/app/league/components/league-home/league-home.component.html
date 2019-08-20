@@ -1,0 +1,4 @@
+<lm-league-list *ngIf="!selectedLeague" [leagues]="leagues" (selectedLeague)="leagueSelected($event)"></lm-league-list>
+<lm-page-layout *ngIf="selectedLeague">
+  <lm-league-details [league]="selectedLeague" (leagueClosed)="clearSelectedLeague()"></lm-league-details>
+</lm-page-layout>

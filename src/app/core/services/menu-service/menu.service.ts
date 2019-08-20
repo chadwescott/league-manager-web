@@ -7,7 +7,7 @@ import { RouterService } from 'src/app/routing/services/router-service/router.se
 })
 export class MenuService {
   menuData: MenuData[] = [
-      new MenuData('My Leagues', 'fas fa-basketball-ball', () => this.routerService.showHome()),
+      new MenuData('My Leagues', 'fas fa-basketball-ball', () => this.routerService.showLeagues()),
       new MenuData('Schedule', 'far fa-calendar-alt', () => this.routerService.showHome()),
       new MenuData('Standings', 'fas fa-list-ol', () => this.routerService.showHome()),
       new MenuData('Participants', 'fas fa-user-friends', () => this.routerService.showHome()),

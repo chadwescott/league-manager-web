@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdministrationModule } from './administration/administration.module';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
+import { LeagueModule } from './league/league.module';
 import { RegistrationModule } from './registration/registration.module';
 import { RoutingModule } from './routing/routing.module';
 
@@ -23,6 +24,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     CoreModule,
     HomeModule,
+    LeagueModule,
     ReactiveFormsModule,
     RegistrationModule,
     RoutingModule
