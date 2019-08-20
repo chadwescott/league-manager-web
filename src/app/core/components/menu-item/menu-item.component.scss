@@ -1,0 +1,21 @@
+@import '../../../../assets/scss/variables.scss';
+
+$card-size: 150px;
+
+mat-card {
+    height: $card-size;
+    width: $card-size;
+    cursor: pointer;
+    background-image: $metallic-background;
+    border: $metallic-border;
+}
+
+.icon {
+    font-size: 110px;
+    color: $accent-color;
+}
+
+.label {
+    font-size: 24px;
+    color: $accent-color;
+}

@@ -1,0 +1,9 @@
+@import '../../../../assets/scss/variables.scss';
+
+button .icon {
+    font-size: $button-icon-font-size;
+}
+
+mat-form-field {
+    width: 300px;
+}
