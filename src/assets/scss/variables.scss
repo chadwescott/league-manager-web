@@ -7,6 +7,12 @@ $accent: mat-palette($mat-light-blue, 700);
 $warn: mat-palette($mat-red);
 $theme: mat-light-theme($primary, $accent, $warn);
 
+$darker-primary-color: mat-color($primary, darker);
+$lighter-primary-color: mat-color($primary, lighter);
+
+$darker-accent-color: mat-color($accent, darker);
+$lighter-accent-color: mat-color($accent, lighter);
+
 $primary-color: mat-color($primary);
 $accent-color: mat-color($accent);
 $warn-color: mat-color($warn);

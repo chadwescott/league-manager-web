@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterService } from '../../../routing/services/router-service/router.service';
+import { MenuService } from '../../services/menu-service/menu.service';
+import { MenuData } from '../../models/menu-data';
 
 @Component({
   selector: 'lm-header',
@@ -7,7 +9,10 @@ import { RouterService } from '../../../routing/services/router-service/router.s
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  constructor(public routerService: RouterService) {
+  menuData: MenuData[];
+
+  constructor(public routerService: RouterService, menuService: MenuService) {
+    this.menuData = menuService.getMenuData();
   }
 
   ngOnInit() {

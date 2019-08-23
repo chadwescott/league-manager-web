@@ -11,11 +11,16 @@
 }
 
 mat-toolbar {
-  height: 30px;
+  height: 40px;
   background-color: $primary-color;
-  color: white;
+  color: mat-color($primary, default-contrast);
 }
 
 mat-toolbar button .icon {
   font-size: 20px;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  padding: 0;
 }

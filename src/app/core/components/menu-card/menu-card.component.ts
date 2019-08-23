@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MenuData } from '../../models/menu-data';
 
 @Component({
-  selector: 'lm-menu-item',
-  templateUrl: './menu-item.component.html',
-  styleUrls: ['./menu-item.component.scss']
+  selector: 'lm-menu-card',
+  templateUrl: './menu-card.component.html',
+  styleUrls: ['./menu-card.component.scss']
 })
-export class MenuItemComponent implements OnInit {
+export class MenuCardComponent implements OnInit {
   @Input() menuData: MenuData;
 
   constructor() { }

@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreModule } from '../core/core.module';
+import { MembersModule } from '../members/members.module';
 
 // Components
 import { LeagueDetailsComponent } from './components/league-details/league-details.component';
@@ -19,7 +20,8 @@ import { LeagueHomeComponent } from './components/league-home/league-home.compon
   ],
   imports: [
     CommonModule,
-    CoreModule
+    CoreModule,
+    MembersModule
   ],
   exports: [
     LeagueDetailsComponent,

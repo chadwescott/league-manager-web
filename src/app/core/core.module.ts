@@ -8,14 +8,14 @@ import { RoutingModule } from '../routing/routing.module';
 // Components
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { MenuItemComponent } from './components/menu-item/menu-item.component';
+import { MenuCardComponent } from './components/menu-card/menu-card.component';
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     MenuComponent,
-    MenuItemComponent,
+    MenuCardComponent,
     PageLayoutComponent
   ],
   imports: [
@@ -29,7 +29,7 @@ import { PageLayoutComponent } from './components/page-layout/page-layout.compon
     HeaderComponent,
     MaterialModule,
     MenuComponent,
-    MenuItemComponent,
+    MenuCardComponent,
     PageLayoutComponent
   ]
 })

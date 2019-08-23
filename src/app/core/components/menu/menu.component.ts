@@ -12,7 +12,7 @@ export class MenuComponent implements OnInit {
 
   constructor(private menuService: MenuService) {
     this.menuData = this.menuService.getMenuData();
-   }
+  }
 
   ngOnInit() {
   }

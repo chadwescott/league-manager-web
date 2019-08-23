@@ -1,23 +1,20 @@
-<nav class="navbar">
-  <div class="navbar-brand">
-    <div fxLayout="row wrap" fxLayoutAlign="left end" fxLayoutGap="10px">
-      <div fxFlex="0 0 0"></div>
-      <div fxFlex>
-        <h2 class="mat-h2 mat-headline">League Manager</h2>
-      </div>
-      <div fxFlex="0 0 0"></div>
-    </div>
-  </div>
-</nav>
 <mat-toolbar fxLayout="row" fxLayoutAlign="left center">
-  <div fxFlex="0 1 40px">
-    <button mat-icon-button (click)="routerService.showHome()">
-      <span class="icon">
-        <i class="fas fa-home" style="margin-bottom: 2px;"></i>
-      </span>
-    </button>
+  <div fxFlex="0 1 0">
+    <span>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <ng-container *ngFor="let data of menuData">
+          <button mat-menu-item (click)="data.action()">
+            <i [class]="data.iconClass"></i>
+            <span style="padding-left: 6px;">{{data.text}}</span>
+          </button>
+        </ng-container>
+      </mat-menu>
+    </span>
   </div>
-  <div fxFlex>{{routerService.title}}</div>
+  <div fxFlex>League Manger | {{routerService.title}}</div>
   <div fxFlex="0 1 120px">
     <button mat-button (click)="routerService.showSignIn()">
       <span class="label">Sign In</span>
