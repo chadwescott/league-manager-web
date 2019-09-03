@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { League } from '../../models/league';
+import { League } from '../../../core/models/league';
 
 @Component({
   selector: 'lm-league-details',

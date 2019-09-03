@@ -4,7 +4,7 @@
   </ng-container>
   <ng-container *ngIf="selectedLeague">
     <lm-league-details [league]="selectedLeague" (leagueClosed)="clearSelectedLeague()">
-      <lm-member-list [members]="leagueMembers"></lm-member-list>
+      <lm-player-list [players]="leaguePlayers"></lm-player-list>
     </lm-league-details>
   </ng-container>
 </lm-page-layout>

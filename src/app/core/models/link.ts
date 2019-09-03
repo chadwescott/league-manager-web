@@ -1,3 +1,8 @@
 export class Link {
-    constructor(public name: string, public url: string) {}
+    constructor(
+        public href: string,
+        public rel: string,
+        public method: string,
+        public mediaType: string
+    ) { }
 }

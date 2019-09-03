@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { League } from '../models/league';
-import { Member } from 'src/app/members/models/member';
+import { League } from '../../core/models/league';
+import { Player } from 'src/app/core/models/player';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ export class LeagueService {
     new League('3', 'CooperVision Cornhole')
   ];
 
-  private _members: Member[] = [
-    new Member('1', 'Chad', 'Wescott', 'Chadley', 'chadwescott@gmail.com')
+  private _players: Player[] = [
+    new Player('1', 'Chad', 'Wescott', 'Chadley', 'chadwescott@gmail.com')
   ];
 
   constructor() { }
@@ -23,7 +23,7 @@ export class LeagueService {
     return of(this._leagues);
   }
 
-  getLeagueMembers(league: League): Observable<Member[]> {
-    return of(this._members);
+  getLeaguePlayers(league: League): Observable<Player[]> {
+    return of(this._players);
   }
 }

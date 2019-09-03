@@ -1,8 +1,8 @@
-<table mat-table [dataSource]="members">
+<table mat-table [dataSource]="players">
   <ng-container matColumnDef="star" sticky>
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let entity">
-      <button mat-icon-button aria-label="View" (click)="selectMember(entity)">
+      <button mat-icon-button aria-label="View" (click)="selectPlayer(entity)">
         <mat-icon>search</mat-icon>
       </button>
     </td>

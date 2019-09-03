@@ -9,8 +9,10 @@ import { CoreModule } from './core/core.module';
 import { GameModule } from './game/game.module';
 import { HomeModule } from './home/home.module';
 import { LeagueModule } from './league/league.module';
+import { PlayerModule } from './player/player.module';
 import { RegistrationModule } from './registration/registration.module';
 import { RoutingModule } from './routing/routing.module';
+import { TeamModule } from './team/team.module';
 
 // Components
 import { AppComponent } from './app.component';
@@ -27,9 +29,11 @@ import { AppComponent } from './app.component';
     GameModule,
     HomeModule,
     LeagueModule,
+    PlayerModule,
     ReactiveFormsModule,
     RegistrationModule,
-    RoutingModule
+    RoutingModule,
+    TeamModule
   ],
   bootstrap: [AppComponent]
 })

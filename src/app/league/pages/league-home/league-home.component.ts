@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { League } from '../../models/league';
+import { League } from '../../../core/models/league';
 import { LeagueService } from '../../services/league.service';
 import { Subscription } from 'rxjs';
-import { Member } from 'src/app/members/models/member';
+import { Player } from 'src/app/core/models/player';
 
 @Component({
   selector: 'lm-league-home',
@@ -11,11 +11,11 @@ import { Member } from 'src/app/members/models/member';
 })
 export class LeagueHomeComponent implements OnInit, OnDestroy {
   private _leagues$: Subscription;
-  private _getMembers$: Subscription;
+  private _getPlayers$: Subscription;
 
   leagues: League[];
   selectedLeague: League;
-  leagueMembers: Member[];
+  leaguePlayers: Player[];
 
   constructor(private _leagueService: LeagueService) {
     this._leagues$ = this._leagueService.getLeagues().subscribe(x => this.leagues = x);
@@ -26,12 +26,12 @@ export class LeagueHomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this._leagues$) { this._leagues$.unsubscribe(); }
-    if (this._getMembers$) { this._getMembers$.unsubscribe(); }
+    if (this._getPlayers$) { this._getPlayers$.unsubscribe(); }
   }
 
   leagueSelected(league: League): void {
     this.selectedLeague = league;
-    this._getMembers$ = this._leagueService.getLeagueMembers(league).subscribe(x => this.leagueMembers = x);
+    this._getPlayers$ = this._leagueService.getLeaguePlayers(league).subscribe(x => this.leaguePlayers = x);
   }
 
   clearSelectedLeague(): void {
