@@ -10,7 +10,7 @@ import { LeagueDetailsComponent } from './components/league-details/league-detai
 // Services
 import { LeagueService } from './services/league.service';
 import { LeagueListComponent } from './components/league-list/league-list.component';
-import { LeagueHomeComponent } from './components/league-home/league-home.component';
+import { LeagueHomeComponent } from './pages/league-home/league-home.component';
 
 @NgModule({
   declarations: [

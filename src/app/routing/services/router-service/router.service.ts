@@ -18,6 +18,10 @@ export class RouterService {
     });
   }
 
+  public showAddGame() {
+    this.changePage('add-game');
+  }
+
   public showAdministration() {
     this.changePage('administration');
   }

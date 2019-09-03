@@ -1,14 +1,12 @@
 <div class="league-details-card-panel">
-  <div class="card-panel-title">
-    <div fxLayout="row">
-      <div fxFlex="1 1 100%">
-        {{league?.name}}
-      </div>
-      <div fxFlex>
-        <button mat-icon-button aria-label="Close" (click)="close()">
-          <mat-icon>close</mat-icon>
-        </button>
-      </div>
+  <div class="card-panel-title" fxLayout="row">
+    <div fxFlex="1 1 100%" fxLayout="column" fxLayoutAlign="center">
+      {{league?.name}}
+    </div>
+    <div fxFlex>
+      <button mat-icon-button aria-label="Close" (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
   </div>
   <div class="card-panel-body">
