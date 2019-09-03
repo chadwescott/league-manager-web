@@ -1,9 +1,10 @@
-import { TeamScore } from './team-score';
+import { TeamRoundScore } from './team-round-score';
 
 export class GameRound {
     constructor(
         public id: string,
+        public gameId: string,
         public number: number,
-        public teameScore: TeamScore
+        public teameScore: TeamRoundScore
     ) { }
 }

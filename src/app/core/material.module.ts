@@ -11,8 +11,8 @@ import {
     MatListModule,
     MatMenuModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
     MatSidenavModule,
-    MatStepperModule,
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
@@ -31,12 +31,12 @@ const MaterialComponents = [
     MatListModule,
     MatMenuModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
     MatSidenavModule,
-    MatStepperModule,
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule,
+    MatTooltipModule
 ];
 
 @NgModule({

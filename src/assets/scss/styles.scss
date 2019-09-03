@@ -20,6 +20,7 @@ body {
   border-radius: 4px;
   padding: 4px;
   background-color: mat-color($mat-brown, 500);//$darker-primary-color;
+  margin-bottom: 10px;
 }
 
 .card-panel-title {
@@ -29,7 +30,6 @@ body {
   padding-bottom: 4px;
   padding-left: 4px;
   color: white;
-  text-align: center;
 }
 
 .card-panel-title .mat-icon-button {
@@ -56,6 +56,10 @@ tr.mat-footer-row, tr.mat-row {
 .mat-table {
   width: 100%;
   background-color: mat-color($mat-yellow, 100);
+}
+
+.error {
+  color: $error-color;
 }
 
 // material icons

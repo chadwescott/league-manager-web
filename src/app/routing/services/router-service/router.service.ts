@@ -26,6 +26,10 @@ export class RouterService {
     this.changePage('administration');
   }
 
+  public showGames() {
+    this.changePage('games');
+  }
+
   public showHome() {
     this.changePage('');
   }
