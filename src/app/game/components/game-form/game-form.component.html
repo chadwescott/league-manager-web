@@ -1,5 +1,5 @@
 <form novalidate #f="ngForm">
-    <div class="form-group">
+    <div class="form-group" *ngIf="minTeams != maxTeams">
         <mat-form-field>
             <mat-label>Number of Teams</mat-label>
             <mat-select [(value)]="numberOfTeams" (selectionChange)="numberOfTeamsChanged()">
@@ -7,18 +7,18 @@
             </mat-select>
         </mat-form-field>
     </div>
-    <ng-container *ngFor="let x of teamEntrants; index as i">
+    <ng-container *ngFor="let x of teamNumbers; index as i">
         <div class="form-group">
-        <mat-form-field>
-            <mat-label>Select Team {{i + 1}}</mat-label>
-            <mat-select [(value)]="teamEntrants[i]" required>
-                <mat-option *ngFor="let t of teams" [value]="t">{{t.name}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+            <mat-form-field>
+                <mat-label>Select Team {{i + 1}}</mat-label>
+                <mat-select [(value)]="teamEntrants[i]" required>
+                    <mat-option *ngFor="let t of teams" [value]="t">{{t.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
     </ng-container>
     <div class="form-group">
         <button mat-raised-button color="accent" (click)="save()">Save</button>
     </div>
-    <div class="form-group error">{{errorMessage}}</div>
+    <div class="error">{{errorMessage}}</div>
 </form>

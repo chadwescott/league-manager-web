@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScoreFormComponent } from './score-form.component';
+import { RoundScoreFormComponent } from './round-score-form.component';
 
-describe('ScoreFormComponent', () => {
-  let component: ScoreFormComponent;
-  let fixture: ComponentFixture<ScoreFormComponent>;
+describe('RoundScoreFormComponent', () => {
+  let component: RoundScoreFormComponent;
+  let fixture: ComponentFixture<RoundScoreFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScoreFormComponent ]
+      declarations: [ RoundScoreFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ScoreFormComponent);
+    fixture = TestBed.createComponent(RoundScoreFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -8,7 +8,10 @@ import { Team } from '../core/models/teams';
 export class TeamService {
   private _teams: Team[] = [
     new Team('1', 'Chad', 1),
-    new Team('2', 'Nancy', 2)
+    new Team('2', 'Nancy', 2),
+    new Team('3', 'Molly', 3),
+    new Team('4', 'Elizabeth', 4),
+    new Team('5', 'Annabelle', 5),
   ];
 
   constructor() { }

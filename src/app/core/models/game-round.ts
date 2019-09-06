@@ -5,6 +5,6 @@ export class GameRound {
         public id: string,
         public gameId: string,
         public number: number,
-        public teameScore: TeamRoundScore
+        public teameScores: TeamRoundScore[]
     ) { }
 }

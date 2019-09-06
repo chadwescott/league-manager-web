@@ -8,5 +8,5 @@
       <lm-player-list [players]="gamePlayers"></lm-player-list>
     </lm-game-details> -->
   </ng-container>
-  <lm-game-form minTeams="2" maxTeams="5" [teams]="teams"></lm-game-form>
+  <lm-game-form minTeams="2" maxTeams="5" [teams]="teams" (gameSaved)="saveGame($event)"></lm-game-form>
 </lm-page-layout>

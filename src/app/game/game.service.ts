@@ -10,10 +10,11 @@ import { Team } from '../core/models/teams';
 })
 export class GameService {
   private _games: Game[] = [
-    new Game('1', 1, [ new Team('1', 'Chad', 1)], new Date(Date.now()))
+    new Game('1', 1, [new Team('1', 'Chad', 1)], new Date(Date.now()))
   ];
-  private _gameRounds: GameRound[] = [];
-  private _teamRoundScores: TeamRoundScore[] = [];
+  private _gameRounds: { [gameId: string]: GameRound[]; } = {};
+  private _teamRoundScores: { [gameRoundId: string]: TeamRoundScore[]; } = {};
+  private  _gameNumber = 2;
 
   constructor() { }
 
@@ -21,8 +22,14 @@ export class GameService {
     return of(this._games);
   }
 
-  public createGame(game: Game) {
+  public getGameById(id: string): Observable<Game> {
+    return of(this._games.find(x => x.id === id));
+  }
+
+  public createGame(game: Game): Observable<Game> {
+    game.number = this._gameNumber++;
     this._games.push(game);
+    return of(game);
   }
 
   public deleteGame(game: Game): void {
@@ -31,45 +38,117 @@ export class GameService {
     this._games.splice(index, 1);
   }
 
-  public editGame(game: Game): void {
+  public editGame(game: Game): Observable<Game> {
     const index = this._games.findIndex(x => x.id === game.id);
     if (index < 0) { return; }
     this._games[index] = game;
+    return of(game);
   }
 
-  public addRound(gameRound: GameRound): void {
-    const index = this._games.findIndex(x => x.id === gameRound.gameId);
-    if (index < 0) { return; }
-    this._gameRounds.push(gameRound);
+  public getGameRounds(id: string): Observable<GameRound[]> {
+    return of(this._gameRounds[id]);
+  }
+
+  public getGameRoundById(gameId: string, id: string): Observable<GameRound> {
+    let gameRound: GameRound = null;
+    const getGameRounds$ = this.getGameRounds(gameId).subscribe(gameRounds => {
+      if (gameRounds == null) { return; }
+      gameRound = gameRounds.find(x => x.id === id);
+    });
+    getGameRounds$.unsubscribe();
+    return of(gameRound);
+  }
+
+  public createRound(gameRound: GameRound): Observable<GameRound> {
+    const gameId = gameRound.gameId;
+    const getGame$ = this.getGameById(gameId).subscribe(game => {
+      if (game == null) { return; }
+
+      if (this._gameRounds[gameId] == null) {
+        this._gameRounds[gameId] = [];
+      }
+
+      this._gameRounds[gameId].push(gameRound);
+    });
+
+    getGame$.unsubscribe();
+    return of(gameRound);
   }
 
   public deleteRound(gameRound: GameRound): void {
-    const index = this._games.findIndex(x => x.id === gameRound.gameId);
-    if (index < 0) { return; }
-    this._gameRounds.splice(index, 1);
+    const gameId = gameRound.gameId;
+    const getGame$ = this.getGameById(gameId).subscribe(game => {
+      if (game == null) { return; }
+
+      if (this._gameRounds[gameId] == null) { return; }
+
+      const index = this._gameRounds[gameId].findIndex(x => x.id === gameRound.id);
+      if (index < 0) { return; }
+
+      this._gameRounds[gameId].splice(index, 1);
+    });
+
+    getGame$.unsubscribe();
   }
 
-  public editRound(gameRound: GameRound): void {
-    const index = this._games.findIndex(x => x.id === gameRound.gameId);
-    if (index < 0) { return; }
-    this._gameRounds[index] = gameRound;
+  public editRound(gameRound: GameRound): Observable<GameRound> {
+    const gameId = gameRound.gameId;
+    const getGame$ = this.getGameById(gameId).subscribe(game => {
+      if (game == null) { return; }
+
+      if (this._gameRounds[gameId] == null) { return; }
+
+      const index = this._gameRounds[gameId].findIndex(x => x.id === gameRound.id);
+      if (index < 0) { return; }
+
+      this._gameRounds[gameId][index] = gameRound;
+    });
+
+    getGame$.unsubscribe();
+    return of(gameRound);
   }
 
-  public addRoundTeamScore(teamRoundScore: TeamRoundScore): void {
-    const index = this._gameRounds.findIndex(x => x.id === teamRoundScore.gameRoundId);
-    if (index < 0) { return; }
-    this._teamRoundScores.push(teamRoundScore);
+  public createRoundTeamScore(gameId: string, teamRoundScore: TeamRoundScore): Observable<TeamRoundScore> {
+    const getGameRoundById$ = this.getGameRoundById(gameId, teamRoundScore.gameRoundId).subscribe(gameRound => {
+      if (gameRound == null) { return; }
+
+      if (this._teamRoundScores[gameRound.id] == null) {
+        this._teamRoundScores[gameRound.id] = [];
+      }
+
+      this._teamRoundScores[gameRound.id].push(teamRoundScore);
+    });
+
+    getGameRoundById$.unsubscribe();
+    return of(teamRoundScore);
   }
 
-  public deleteRoundTeamScore(teamRoundScore: TeamRoundScore): void {
-    const index = this._teamRoundScores.findIndex(x => x.id === teamRoundScore.id);
-    if (index < 0) { return; }
-    this._teamRoundScores.splice(index, 1);
+  public deleteRoundTeamScore(gameId: string, teamRoundScore: TeamRoundScore): void {
+    const getGameRoundById$ = this.getGameRoundById(gameId, teamRoundScore.gameRoundId).subscribe(gameRound => {
+      if (gameRound == null) { return; }
+
+      if (this._teamRoundScores[gameRound.id] == null) { return; }
+      const index = this._teamRoundScores[gameRound.id].findIndex(x => x.id === teamRoundScore.id);
+      if (index < 0) { return; }
+
+      this._teamRoundScores[gameRound.id].splice(index, 1);
+    });
+
+    getGameRoundById$.unsubscribe();
   }
 
-  public editRoundTeamScore(teamRoundScore: TeamRoundScore): void {
-    const index = this._teamRoundScores.findIndex(x => x.id === teamRoundScore.id);
-    if (index < 0) { return; }
-    this._teamRoundScores[index] = teamRoundScore;
+  public editRoundTeamScore(gameId: string, teamRoundScore: TeamRoundScore): Observable<TeamRoundScore> {
+    const getGameRoundById$ = this.getGameRoundById(gameId, teamRoundScore.gameRoundId).subscribe(gameRound => {
+      if (gameRound == null) { return; }
+
+      if (this._teamRoundScores[gameRound.id] == null) { return; }
+      const index = this._teamRoundScores[gameRound.id].findIndex(x => x.id === teamRoundScore.id);
+      if (index < 0) { return; }
+
+      this._teamRoundScores[gameRound.id][index] = teamRoundScore;
+    });
+
+    getGameRoundById$.unsubscribe();
+    return of(teamRoundScore);
   }
 }

@@ -16,32 +16,35 @@ export class GameFormComponent implements OnInit {
 
   numberOfTeams: number;
   numberOfTeamsOptions: number[] = [];
+  teamNumbers = [];
   teamEntrants: Team[] = [];
   errorMessage: string;
 
   constructor() { }
 
   ngOnInit() {
-    this.numberOfTeams = this.minTeams;
     for (let i = this.minTeams; i <= this.maxTeams; i++) {
       this.numberOfTeamsOptions.push(i);
     }
+
+    this.numberOfTeams = this.minTeams;
     this.numberOfTeamsChanged();
   }
 
   numberOfTeamsChanged() {
-    // const defaultTeam = this.teams.length > 0 ? this.teams[0] : null;
-    const defaultTeam = null;
     while (this.numberOfTeams > this.teamEntrants.length) {
-      this.teamEntrants.push(defaultTeam);
+      this.teamEntrants.push(null);
+      this.teamNumbers.push(null);
     }
 
     while (this.numberOfTeams < this.teamEntrants.length) {
       this.teamEntrants.pop();
+      this.teamNumbers.pop();
     }
   }
 
   save() {
+    console.log(this.teamEntrants);
     this.errorMessage = null;
     for (let i = 0; i < this.teamEntrants.length; i++) {
       if (this.teamEntrants[i] == null) {
@@ -56,11 +59,5 @@ export class GameFormComponent implements OnInit {
 
     const game = new Game('', 0, this.teamEntrants, new Date(Date.now()));
     this.gameSaved.emit(game);
-
-    console.log(game);
-  }
-
-  selectedTeamChangedHandler(index: number, team: Team): void {
-    this.teamEntrants[index] = team;
   }
 }
