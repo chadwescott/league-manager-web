@@ -9,6 +9,7 @@ import { RoutingModule } from '../routing/routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { MenuCardComponent } from './components/menu-card/menu-card.component';
+import { NumericInputDirective } from './directives/numeric-input.directive';
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
 
 @NgModule({
@@ -16,6 +17,7 @@ import { PageLayoutComponent } from './components/page-layout/page-layout.compon
     HeaderComponent,
     MenuComponent,
     MenuCardComponent,
+    NumericInputDirective,
     PageLayoutComponent
   ],
   imports: [
@@ -30,6 +32,7 @@ import { PageLayoutComponent } from './components/page-layout/page-layout.compon
     MaterialModule,
     MenuComponent,
     MenuCardComponent,
+    NumericInputDirective,
     PageLayoutComponent
   ]
 })

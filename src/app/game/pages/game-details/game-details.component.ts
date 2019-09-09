@@ -7,6 +7,7 @@ import { GameService } from '../../game.service';
 import { Game } from 'src/app/core/models/game';
 import { GameRound } from 'src/app/core/models/game-round';
 import { GameRoundListComponent } from '../../components/game-round-list/game-round-list.component';
+import { Team } from 'src/app/core/models/teams';
 
 @Component({
   selector: 'lm-game-details',
@@ -17,6 +18,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   @ViewChild(GameRoundListComponent, { static: true }) gameRoundList: GameRoundListComponent;
 
   game: Game;
+  teams: Team[];
   rounds: GameRound[];
 
   private _routeParams$: Subscription;
@@ -47,6 +49,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
         return;
       }
       this.game = game;
+      this.teams = game.teamScores.map(ts => ts.team);
     });
   }
 

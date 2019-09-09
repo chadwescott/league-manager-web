@@ -81,11 +81,28 @@ export class GameService {
     const id = `${game.id}${this._separator}${roundNumber}`;
     const gameRound = new GameRound(id, game.id, roundNumber);
     gameRound.teamScores = game.teamScores.map((teamScore, index) =>
-      new TeamRoundScore(`${id}${this._separator}${index}`, gameRound, teamScore.team, 0));
+      new TeamRoundScore(`${id}${this._separator}${index}`, teamScore.team, 0));
 
     this._gameRounds[game.id].push(gameRound);
+    this.updateGameTeamScores(game);
 
     return of(gameRound);
+  }
+
+  private updateGameTeamScores(game: Game): void {
+    const rounds = this._gameRounds[game.id];
+    if (rounds.length === 0) { return; }
+    const teamScores = rounds[0].teamScores.map(x => new GameTeamScore('', game.id, x.team));
+
+    for (let i = 0; i < rounds.length; i++) {
+      for (let j = 0; j < rounds[i].teamScores.length; j++) {
+        console.log(rounds[i].teamScores[j].score);
+        teamScores[j].score += Number(rounds[i].teamScores[j].score);
+      }
+    }
+
+    // console.log(teamScores);
+    game.teamScores = teamScores;
   }
 
   public deleteRound(gameRound: GameRound): void {
@@ -121,40 +138,40 @@ export class GameService {
     return of(gameRound);
   }
 
-  public createRoundTeamScore(teamRoundScore: TeamRoundScore): Observable<TeamRoundScore> {
-    const gameRound = teamRoundScore.gameRound;
+  // public createRoundTeamScore(teamRoundScore: TeamRoundScore): Observable<TeamRoundScore> {
+  //   const gameRound = teamRoundScore.gameRound;
 
-    if (gameRound == null) { return; }
+  //   if (gameRound == null) { return; }
 
-    if (this._teamRoundScores[gameRound.id] == null) {
-      this._teamRoundScores[gameRound.id] = [];
-    }
+  //   if (this._teamRoundScores[gameRound.id] == null) {
+  //     this._teamRoundScores[gameRound.id] = [];
+  //   }
 
-    this._teamRoundScores[gameRound.id].push(teamRoundScore);
+  //   this._teamRoundScores[gameRound.id].push(teamRoundScore);
 
-    return of(teamRoundScore);
-  }
+  //   return of(teamRoundScore);
+  // }
 
-  public deleteRoundTeamScore(gameId: string, teamRoundScore: TeamRoundScore): void {
-    this.gameRoundScoreAction(gameId, teamRoundScore, (gameRoundId, index) => this._teamRoundScores[gameRoundId].splice(index, 1));
-  }
+  // public deleteRoundTeamScore(gameId: string, teamRoundScore: TeamRoundScore): void {
+  //   this.gameRoundScoreAction(gameId, teamRoundScore, (gameRoundId, index) => this._teamRoundScores[gameRoundId].splice(index, 1));
+  // }
 
-  public editRoundTeamScore(gameId: string, teamRoundScore: TeamRoundScore): Observable<TeamRoundScore> {
-    this.gameRoundScoreAction(gameId, teamRoundScore, (gameRoundId, index) => this._teamRoundScores[gameRoundId][index] = teamRoundScore);
-    return of(teamRoundScore);
-  }
+  // public editRoundTeamScore(gameId: string, teamRoundScore: TeamRoundScore): Observable<TeamRoundScore> {
+  //   this.gameRoundScoreAction(gameId, teamRoundScore, (gameRoundId, index) => this._teamRoundScores[gameRoundId][index] = teamRoundScore);
+  //   return of(teamRoundScore);
+  // }
 
-  private gameRoundScoreAction(gameId: string, teamRoundScore: TeamRoundScore, action: (gameRoundId, index) => {}): void {
-    const getGameRoundById$ = this.getGameRoundById(gameId, teamRoundScore.gameRound.id).subscribe(gameRound => {
-      if (gameRound == null) { return; }
+  // private gameRoundScoreAction(gameId: string, teamRoundScore: TeamRoundScore, action: (gameRoundId, index) => {}): void {
+  //   const getGameRoundById$ = this.getGameRoundById(gameId, teamRoundScore.gameRound.id).subscribe(gameRound => {
+  //     if (gameRound == null) { return; }
 
-      if (this._teamRoundScores[gameRound.id] == null) { return; }
-      const index = this._teamRoundScores[gameRound.id].findIndex(x => x.id === teamRoundScore.id);
-      if (index < 0) { return; }
+  //     if (this._teamRoundScores[gameRound.id] == null) { return; }
+  //     const index = this._teamRoundScores[gameRound.id].findIndex(x => x.id === teamRoundScore.id);
+  //     if (index < 0) { return; }
 
-      action(gameRound.id, index);
-    });
+  //     action(gameRound.id, index);
+  //   });
 
-    getGameRoundById$.unsubscribe();
-  }
+  //   getGameRoundById$.unsubscribe();
+  // }
 }

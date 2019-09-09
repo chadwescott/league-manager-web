@@ -1,8 +1,8 @@
-@import './variables.scss';
+@import "./variables.scss";
 @include angular-material-theme($theme);
 
 * {
-  font-family: Roboto, "Helvetica Neue", sans-serif, 'FoundrySterling-Book', Arial;
+  font-family: Roboto, "Helvetica Neue", sans-serif, "FoundrySterling-Book", Arial;
 }
 
 html,
@@ -38,23 +38,24 @@ body {
   color: white;
 }
 
-.card-panel-title .mat-icon-button {
-  height: 30px;
-  width: 30px;
-  line-height: 30px;
-}
-
 .summary-card-panel-title {
   @extend .card-panel-title;
   height: 30px;
 }
 
 .card-panel-title .mat-icon-button {
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
   margin-top: -2px;
 }
 
 .card-panel-title .material-icons {
   margin-top: -2px;
+}
+
+div .section {
+  padding-bottom: 8px;
 }
 
 .card-panel-body {
@@ -67,11 +68,12 @@ body {
 }
 
 tr.mat-header-row {
-    height: 40px;
+  height: 40px;
 }
 
-tr.mat-footer-row, tr.mat-row {
-    height: 40px;
+tr.mat-footer-row,
+tr.mat-row {
+  height: 40px;
 }
 
 .mat-table {

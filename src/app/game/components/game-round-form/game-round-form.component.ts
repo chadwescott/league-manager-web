@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { GameRound } from 'src/app/core/models/game-round';
 
 @Component({
   selector: 'lm-game-round-form',
@@ -6,7 +7,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./game-round-form.component.scss']
 })
 export class GameRoundFormComponent implements OnInit {
-  @Output() addRound = new EventEmitter();
+  @Input() gameRound: GameRound;
+  @Output() addRound = new EventEmitter<GameRound>();
 
   constructor() { }
 
@@ -14,6 +16,6 @@ export class GameRoundFormComponent implements OnInit {
   }
 
   onAddRound() {
-    this.addRound.emit();
+    this.addRound.emit(this.gameRound);
   }
 }

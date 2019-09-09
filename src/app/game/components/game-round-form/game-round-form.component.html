@@ -1,3 +1,11 @@
-<div>
+<div class="section">
+    <ng-container *ngFor="let teamScore of gameRound.teamScores">
+        <div class="form-group">
+            <mat-form-field>
+                <mat-label>{{teamScore.team.name}}'s score</mat-label>
+                <input matInput type="text" lmNumericInput [(ngModel)]="teamScore.score" />
+            </mat-form-field>
+        </div>
+    </ng-container>
     <button mat-raised-button type="button" color="accent" (click)="onAddRound()">Add Round</button>
 </div>
