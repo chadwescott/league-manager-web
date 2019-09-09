@@ -4,13 +4,15 @@ import { Game } from '../core/models/game';
 import { GameRound } from '../core/models/game-round';
 import { TeamRoundScore } from '../core/models/team-round-score';
 import { Team } from '../core/models/teams';
+import { GameTeamScore } from '../core/models/game-team-score';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
+  private _team1 = new Team('1', 'Chad', 1);
   private _games: Game[] = [
-    new Game('1', 1, [new Team('1', 'Chad', 1)], new Date(Date.now()))
+    new Game('1', 1, [new GameTeamScore('1', '1', this._team1)], new Date(Date.now()))
   ];
   private _gameRounds: { [gameId: string]: GameRound[]; } = {};
   private _teamRoundScores: { [gameRoundId: string]: TeamRoundScore[]; } = {};

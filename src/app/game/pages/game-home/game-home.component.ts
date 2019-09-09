@@ -4,7 +4,6 @@ import { GameService } from '../../game.service';
 import { Game } from 'src/app/core/models/game';
 import { Team } from 'src/app/core/models/teams';
 import { TeamService } from 'src/app/team/team.service';
-import { GameListComponent } from '../../components/game-list/game-list.component';
 
 @Component({
   selector: 'lm-game-home',
@@ -12,14 +11,14 @@ import { GameListComponent } from '../../components/game-list/game-list.componen
   styleUrls: ['./game-home.component.scss']
 })
 export class GameHomeComponent implements OnInit, OnDestroy {
-  @ViewChild(GameListComponent, { static: true }) gameList: GameListComponent;
-
   public games: Game[];
   public selectedGame: Game;
   public teams: Team[];
 
   private _getGames$: Subscription;
   private _getTeams$: Subscription;
+
+  showForm = false;
 
   constructor(
     private _gameService: GameService,
@@ -42,8 +41,16 @@ export class GameHomeComponent implements OnInit, OnDestroy {
   saveGame(game: Game) {
     const createGame$ = this._gameService.createGame(game).subscribe(x => {
       console.log(this.games);
-      this.gameList.update();
+      this.showForm = false;
     });
     createGame$.unsubscribe();
+  }
+
+  clearSelectedGame() {
+    this.selectedGame = null;
+  }
+
+  onCreateGameCancelled() {
+    this.showForm = false;
   }
 }

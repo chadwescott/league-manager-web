@@ -1,12 +1,15 @@
 <lm-page-layout>
-  <!-- <ng-container *ngIf="!selectedGame"> -->
-    <lm-game-list [games]="games" (selectedGame)="gameSelected($event)"></lm-game-list>
-  <!-- </ng-container> -->
-  <ng-container *ngIf="selectedGame">
-      Game {{selectedGame.number}} selected!
-    <!-- <lm-game-details [game]="selectedGame" (gameClosed)="clearSelectedGame()">
-      <lm-player-list [players]="gamePlayers"></lm-player-list>
-    </lm-game-details> -->
+  <ng-container *ngIf="!showForm">
+    <ng-container *ngIf="!selectedGame">
+      <lm-game-list [games]="games" (selectedGame)="gameSelected($event)"></lm-game-list>
+      <button mat-button (click)="showForm = true">Add Game</button>
+    </ng-container>
+    <ng-container *ngIf="selectedGame">
+      <lm-game-details [game]="selectedGame" (gameClosed)="clearSelectedGame()"></lm-game-details>
+    </ng-container>
   </ng-container>
-  <lm-game-form minTeams="2" maxTeams="5" [teams]="teams" (gameSaved)="saveGame($event)"></lm-game-form>
+  <ng-container *ngIf="showForm">
+    <lm-game-form minTeams="2" maxTeams="5" [teams]="teams" (gameSaved)="saveGame($event)"
+      (cancelled)="onCreateGameCancelled()"></lm-game-form>
+  </ng-container>
 </lm-page-layout>

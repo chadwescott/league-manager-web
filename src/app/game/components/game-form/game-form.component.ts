@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Game } from 'src/app/core/models/game';
 import { Team } from 'src/app/core/models/teams';
+import { GameTeamScore } from 'src/app/core/models/game-team-score';
 
 @Component({
   selector: 'lm-game-form',
@@ -13,6 +14,7 @@ export class GameFormComponent implements OnInit {
   @Input() teams: Team[];
 
   @Output() gameSaved = new EventEmitter<Game>();
+  @Output() cancelled = new EventEmitter();
 
   numberOfTeams: number;
   numberOfTeamsOptions: number[] = [];
@@ -43,7 +45,7 @@ export class GameFormComponent implements OnInit {
     }
   }
 
-  save() {
+  onSave() {
     console.log(this.teamEntrants);
     this.errorMessage = null;
     for (let i = 0; i < this.teamEntrants.length; i++) {
@@ -57,7 +59,13 @@ export class GameFormComponent implements OnInit {
       }
     }
 
-    const game = new Game('', 0, this.teamEntrants, new Date(Date.now()));
+    const teamScores = this.teamEntrants.map(x => new GameTeamScore('', '', x));
+
+    const game = new Game('', 0, teamScores, new Date(Date.now()));
     this.gameSaved.emit(game);
+  }
+
+  onCancel() {
+    this.cancelled.emit();
   }
 }

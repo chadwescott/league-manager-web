@@ -1,10 +1,10 @@
-import { Team } from './teams';
+import { GameTeamScore } from './game-team-score';
 
 export class Game {
     constructor(
         public id: string,
         public number: number,
-        public teams: Team[],
+        public teamScores: GameTeamScore[],
         public startTime: Date
     ) {}
 }
