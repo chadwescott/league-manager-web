@@ -46,7 +46,6 @@ export class GameFormComponent implements OnInit {
   }
 
   onSave() {
-    console.log(this.teamEntrants);
     this.errorMessage = null;
     for (let i = 0; i < this.teamEntrants.length; i++) {
       if (this.teamEntrants[i] == null) {

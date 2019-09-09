@@ -1,5 +1,6 @@
 <lm-page-layout>
-    <lm-game-score-summary [teamScores]="game.teamScores"></lm-game-score-summary>
-
+    <lm-game-score-summary [game]="game" [teamScores]="game.teamScores"></lm-game-score-summary>
+    <lm-game-round-form (addRound)="onAddRound()"></lm-game-round-form>
+    <lm-game-round-list [rounds]="rounds"></lm-game-round-list>
     <button mat-raised-button type="button" color="accent" (click)="onClose()">Close</button>
 </lm-page-layout>

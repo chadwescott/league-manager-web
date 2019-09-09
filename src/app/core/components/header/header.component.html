@@ -1,5 +1,5 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="left center">
-  <div fxFlex="0 1 0">
+  <div fxFlex="1 1 0">
     <span>
       <button mat-button [matMenuTriggerFor]="menu">
         <mat-icon>menu</mat-icon>
@@ -14,8 +14,8 @@
       </mat-menu>
     </span>
   </div>
-  <div fxFlex>League Manger | {{routerService.title}}</div>
-  <div fxFlex="0 1 120px">
+  <div fxFlex="1 1">League Manger | {{routerService.title}}</div>
+  <div fxFlex="1 1 0">
     <button mat-button (click)="routerService.showSignIn()">
       <span class="label">Sign In</span>
       <span class="icon">

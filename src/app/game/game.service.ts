@@ -12,22 +12,22 @@ import { GameTeamScore } from '../core/models/game-team-score';
 export class GameService {
   private _team1 = new Team('1', 'Chad', 1);
   private _team2 = new Team('2', 'Nancy', 2);
+  private _games: Game[] = [];
+  private _gameRounds: { [gameId: string]: GameRound[]; } = {};
+  private _teamRoundScores: { [gameRoundId: string]: TeamRoundScore[]; } = {};
+  private _gameNumber = 0;
+  private _separator = '_';
 
-  private _games: Game[] = [
-    new Game('1', 1,
+  constructor() {
+    const game = new Game('1', 1,
       [
         new GameTeamScore('1', '1', this._team1),
         new GameTeamScore('2', '2', this._team2)
       ],
       new Date(Date.now()),
-      null)
-  ];
-
-  private _gameRounds: { [gameId: string]: GameRound[]; } = {};
-  private _teamRoundScores: { [gameRoundId: string]: TeamRoundScore[]; } = {};
-  private _gameNumber = 2;
-
-  constructor() { }
+      null);
+    this.createGame(game);
+  }
 
   public getGames(): Observable<Game[]> {
     return of(this._games);
@@ -38,9 +38,10 @@ export class GameService {
   }
 
   public createGame(game: Game): Observable<Game> {
-    game.number = this._gameNumber++;
+    game.number = ++this._gameNumber;
     game.id = game.number.toString();
     this._games.push(game);
+    this.createRound(game);
     return of(game);
   }
 
@@ -71,19 +72,19 @@ export class GameService {
     return of(gameRound);
   }
 
-  public createRound(gameRound: GameRound): Observable<GameRound> {
-    const gameId = gameRound.gameId;
-    const getGame$ = this.getGameById(gameId).subscribe(game => {
-      if (game == null) { return; }
+  public createRound(game: Game): Observable<GameRound> {
+    if (this._gameRounds[game.id] == null) {
+      this._gameRounds[game.id] = [];
+    }
 
-      if (this._gameRounds[gameId] == null) {
-        this._gameRounds[gameId] = [];
-      }
+    const roundNumber = this._gameRounds[game.id].length + 1;
+    const id = `${game.id}${this._separator}${roundNumber}`;
+    const gameRound = new GameRound(id, game.id, roundNumber);
+    gameRound.teamScores = game.teamScores.map((teamScore, index) =>
+      new TeamRoundScore(`${id}${this._separator}${index}`, gameRound, teamScore.team, 0));
 
-      this._gameRounds[gameId].push(gameRound);
-    });
+    this._gameRounds[game.id].push(gameRound);
 
-    getGame$.unsubscribe();
     return of(gameRound);
   }
 
@@ -120,47 +121,40 @@ export class GameService {
     return of(gameRound);
   }
 
-  public createRoundTeamScore(gameId: string, teamRoundScore: TeamRoundScore): Observable<TeamRoundScore> {
-    const getGameRoundById$ = this.getGameRoundById(gameId, teamRoundScore.gameRoundId).subscribe(gameRound => {
-      if (gameRound == null) { return; }
+  public createRoundTeamScore(teamRoundScore: TeamRoundScore): Observable<TeamRoundScore> {
+    const gameRound = teamRoundScore.gameRound;
 
-      if (this._teamRoundScores[gameRound.id] == null) {
-        this._teamRoundScores[gameRound.id] = [];
-      }
+    if (gameRound == null) { return; }
 
-      this._teamRoundScores[gameRound.id].push(teamRoundScore);
-    });
+    if (this._teamRoundScores[gameRound.id] == null) {
+      this._teamRoundScores[gameRound.id] = [];
+    }
 
-    getGameRoundById$.unsubscribe();
+    this._teamRoundScores[gameRound.id].push(teamRoundScore);
+
     return of(teamRoundScore);
   }
 
   public deleteRoundTeamScore(gameId: string, teamRoundScore: TeamRoundScore): void {
-    const getGameRoundById$ = this.getGameRoundById(gameId, teamRoundScore.gameRoundId).subscribe(gameRound => {
-      if (gameRound == null) { return; }
-
-      if (this._teamRoundScores[gameRound.id] == null) { return; }
-      const index = this._teamRoundScores[gameRound.id].findIndex(x => x.id === teamRoundScore.id);
-      if (index < 0) { return; }
-
-      this._teamRoundScores[gameRound.id].splice(index, 1);
-    });
-
-    getGameRoundById$.unsubscribe();
+    this.gameRoundScoreAction(gameId, teamRoundScore, (gameRoundId, index) => this._teamRoundScores[gameRoundId].splice(index, 1));
   }
 
   public editRoundTeamScore(gameId: string, teamRoundScore: TeamRoundScore): Observable<TeamRoundScore> {
-    const getGameRoundById$ = this.getGameRoundById(gameId, teamRoundScore.gameRoundId).subscribe(gameRound => {
+    this.gameRoundScoreAction(gameId, teamRoundScore, (gameRoundId, index) => this._teamRoundScores[gameRoundId][index] = teamRoundScore);
+    return of(teamRoundScore);
+  }
+
+  private gameRoundScoreAction(gameId: string, teamRoundScore: TeamRoundScore, action: (gameRoundId, index) => {}): void {
+    const getGameRoundById$ = this.getGameRoundById(gameId, teamRoundScore.gameRound.id).subscribe(gameRound => {
       if (gameRound == null) { return; }
 
       if (this._teamRoundScores[gameRound.id] == null) { return; }
       const index = this._teamRoundScores[gameRound.id].findIndex(x => x.id === teamRoundScore.id);
       if (index < 0) { return; }
 
-      this._teamRoundScores[gameRound.id][index] = teamRoundScore;
+      action(gameRound.id, index);
     });
 
     getGameRoundById$.unsubscribe();
-    return of(teamRoundScore);
   }
 }

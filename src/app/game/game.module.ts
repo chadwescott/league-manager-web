@@ -13,6 +13,8 @@ import { GameScoreSummaryComponent } from './components/game-score-summary/game-
 // pages
 import { GameHomeComponent } from './pages/game-home/game-home.component';
 import { GameDetailsComponent } from './pages/game-details/game-details.component';
+import { GameRoundFormComponent } from './components/game-round-form/game-round-form.component';
+import { GameRoundListComponent } from './components/game-round-list/game-round-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { GameDetailsComponent } from './pages/game-details/game-details.componen
     GameListComponent,
     GameHomeComponent,
     GameDetailsComponent,
-    GameScoreSummaryComponent
+    GameScoreSummaryComponent,
+    GameRoundFormComponent,
+    GameRoundListComponent
   ],
   imports: [
     CommonModule,
