@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { TeamRoundScore } from 'src/app/core/models/team-round-score';
 
 @Component({
   selector: 'lm-round-score-form',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./round-score-form.component.scss']
 })
 export class RoundScoreFormComponent implements OnInit {
+  @Input() teamRoundScore: TeamRoundScore;
 
   constructor() { }
 

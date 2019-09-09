@@ -4,6 +4,7 @@ import { GameService } from '../../game.service';
 import { Game } from 'src/app/core/models/game';
 import { Team } from 'src/app/core/models/teams';
 import { TeamService } from 'src/app/team/team.service';
+import { RouterService } from 'src/app/routing/services/router-service/router.service';
 
 @Component({
   selector: 'lm-game-home',
@@ -12,7 +13,6 @@ import { TeamService } from 'src/app/team/team.service';
 })
 export class GameHomeComponent implements OnInit, OnDestroy {
   public games: Game[];
-  public selectedGame: Game;
   public teams: Team[];
 
   private _getGames$: Subscription;
@@ -22,7 +22,8 @@ export class GameHomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private _gameService: GameService,
-    private _teamService: TeamService) { }
+    private _teamService: TeamService,
+    private _routerService: RouterService) { }
 
   ngOnInit() {
     this._getGames$ = this._gameService.getGames().subscribe(x => this.games = x);
@@ -35,7 +36,7 @@ export class GameHomeComponent implements OnInit, OnDestroy {
   }
 
   public gameSelected(game: Game): void {
-    this.selectedGame = game;
+    this._routerService.showGame(game.id);
   }
 
   saveGame(game: Game) {
@@ -44,10 +45,6 @@ export class GameHomeComponent implements OnInit, OnDestroy {
       this.showForm = false;
     });
     createGame$.unsubscribe();
-  }
-
-  clearSelectedGame() {
-    this.selectedGame = null;
   }
 
   onCreateGameCancelled() {

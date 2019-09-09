@@ -11,12 +11,21 @@ import { GameTeamScore } from '../core/models/game-team-score';
 })
 export class GameService {
   private _team1 = new Team('1', 'Chad', 1);
+  private _team2 = new Team('2', 'Nancy', 2);
+
   private _games: Game[] = [
-    new Game('1', 1, [new GameTeamScore('1', '1', this._team1)], new Date(Date.now()))
+    new Game('1', 1,
+      [
+        new GameTeamScore('1', '1', this._team1),
+        new GameTeamScore('2', '2', this._team2)
+      ],
+      new Date(Date.now()),
+      null)
   ];
+
   private _gameRounds: { [gameId: string]: GameRound[]; } = {};
   private _teamRoundScores: { [gameRoundId: string]: TeamRoundScore[]; } = {};
-  private  _gameNumber = 2;
+  private _gameNumber = 2;
 
   constructor() { }
 
@@ -30,6 +39,7 @@ export class GameService {
 
   public createGame(game: Game): Observable<Game> {
     game.number = this._gameNumber++;
+    game.id = game.number.toString();
     this._games.push(game);
     return of(game);
   }

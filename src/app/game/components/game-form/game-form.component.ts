@@ -61,7 +61,7 @@ export class GameFormComponent implements OnInit {
 
     const teamScores = this.teamEntrants.map(x => new GameTeamScore('', '', x));
 
-    const game = new Game('', 0, teamScores, new Date(Date.now()));
+    const game = new Game('', 0, teamScores, new Date(Date.now()), null);
     this.gameSaved.emit(game);
   }
 

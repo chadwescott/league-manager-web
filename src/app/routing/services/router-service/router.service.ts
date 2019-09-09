@@ -30,6 +30,11 @@ export class RouterService {
     this.changePage('games');
   }
 
+  public showGame(id: string) {
+    this.changePage(`games/${id}`);
+  }
+
+
   public showHome() {
     this.changePage('');
   }

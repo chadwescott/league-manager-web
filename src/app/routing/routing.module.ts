@@ -12,10 +12,12 @@ import { SignInComponent } from '../registration/components/sign-in/sign-in.comp
 
 // Services
 import { RouterService } from './services/router-service/router.service';
+import { GameDetailsComponent } from '../game/pages/game-details/game-details.component';
 
 const routes: Routes = [
   { path: 'administration', component: AdministrationComponent, pathMatch: 'full', data: { title: 'Administration' } },
   { path: 'games', component: GameHomeComponent, pathMatch: 'full', data: { title: 'Games' } },
+  { path: 'games/:gameId', component: GameDetailsComponent, pathMatch: 'full', data: { title: 'Game Summary' } },
   { path: '', component: HomeComponent, pathMatch: 'full', data: { title: 'Home' } },
   { path: 'leagues', component: LeagueHomeComponent, pathMatch: 'full', data: { title: 'My Leagues' } },
   { path: 'register', component: RegisterComponent, pathMatch: 'full', data: { title: 'Register' } },
