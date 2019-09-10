@@ -15,6 +15,7 @@ import { GameHomeComponent } from './pages/game-home/game-home.component';
 import { GameDetailsComponent } from './pages/game-details/game-details.component';
 import { GameRoundFormComponent } from './components/game-round-form/game-round-form.component';
 import { GameRoundListComponent } from './components/game-round-list/game-round-list.component';
+import { WildCardIndicatorComponent } from './components/wild-card-indicator/wild-card-indicator.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { GameRoundListComponent } from './components/game-round-list/game-round-
     GameDetailsComponent,
     GameScoreSummaryComponent,
     GameRoundFormComponent,
-    GameRoundListComponent
+    GameRoundListComponent,
+    WildCardIndicatorComponent
   ],
   imports: [
     CommonModule,

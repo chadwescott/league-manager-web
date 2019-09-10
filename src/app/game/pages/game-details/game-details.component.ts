@@ -20,6 +20,9 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   game: Game;
   teams: Team[];
   rounds: GameRound[];
+  wildCard: string;
+
+  private cards: string[] = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 
   private _routeParams$: Subscription;
   private _loadGame$: Subscription;
@@ -34,6 +37,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._routeParams$ = this._route.params.subscribe(params => this.loadGame(params.gameId));
     this._getRounds$ = this._gameService.getGameRounds(this.game.id).subscribe(rounds => this.rounds = rounds);
+    this.updateWildCard();
   }
 
   ngOnDestroy() {
@@ -59,6 +63,11 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     );
     createRound$.unsubscribe();
     this.gameRoundList.updateRounds();
+    this.updateWildCard();
+  }
+
+  private updateWildCard(): void {
+    this.wildCard =  this.cards[(this.rounds.length - 1) % this.cards.length];
   }
 
   onClose(): void {

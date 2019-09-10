@@ -14,7 +14,6 @@ export class GameService {
   private _team2 = new Team('2', 'Nancy', 2);
   private _games: Game[] = [];
   private _gameRounds: { [gameId: string]: GameRound[]; } = {};
-  private _teamRoundScores: { [gameRoundId: string]: TeamRoundScore[]; } = {};
   private _gameNumber = 0;
   private _separator = '_';
 

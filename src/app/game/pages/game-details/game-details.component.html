@@ -1,6 +1,18 @@
 <lm-page-layout>
-    <lm-game-score-summary [game]="game" [teamScores]="game.teamScores"></lm-game-score-summary>
-    <lm-game-round-form [gameRound]="rounds[rounds.length - 1]" (addRound)="onAddRound()"></lm-game-round-form>
-    <lm-game-round-list [rounds]="rounds"></lm-game-round-list>
+    <div fxLayout="row" fxFlexAlign="start middle">
+        <div fxFlex fxLayout="column">
+            <div fxFlex>
+                <lm-game-score-summary [game]="game" [teamScores]="game.teamScores"></lm-game-score-summary>
+            </div>
+            <div fxFlex>
+                <lm-game-round-list [rounds]="rounds"></lm-game-round-list>
+            </div>
+        </div>
+        <div fxFlex fxLayout="column" fxFlexAlign="start start">
+            <lm-wild-card-indicator class="section" [wildCard]="wildCard"></lm-wild-card-indicator>
+            <lm-game-round-form [gameRound]="rounds[rounds.length - 1]" (addRound)="onAddRound()">
+            </lm-game-round-form>
+        </div>
+    </div>
     <button mat-raised-button type="button" color="accent" (click)="onClose()">Close</button>
 </lm-page-layout>
