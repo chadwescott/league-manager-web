@@ -15,18 +15,19 @@
     padding-right: 8px;
     font-style: italic;
     color: $primary-color;
+    font-size: x-large;
 }
 .wild-card {
     display: table-cell;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
+    font-size: xx-large;
     border: solid 1px $darker-accent-color;
     border-radius: 3px;
     background-color: white;
     color: $accent-color;
     text-align: center;
     vertical-align: middle;
-    width: 24px;
-    height: 30px;
-    font-size: larger;
+    width: 28px;
+    height: 34px;
 }

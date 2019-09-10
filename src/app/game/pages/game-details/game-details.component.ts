@@ -16,7 +16,7 @@ import { ScoreSystem } from 'src/app/core/enums/score-system';
   styleUrls: ['./game-details.component.scss']
 })
 export class GameDetailsComponent implements OnInit, OnDestroy {
-  @ViewChild(GameRoundListComponent, { static: true }) gameRoundList: GameRoundListComponent;
+  @ViewChild(GameRoundListComponent, { static: false }) gameRoundList: GameRoundListComponent;
 
   game: Game;
   teams: Team[];
@@ -39,14 +39,12 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._routeParams$ = this._route.params.subscribe(params => this.loadGame(params.gameId));
-    this._getRounds$ = this._gameService.getGameRounds(this.game.id).subscribe(rounds => this.rounds = rounds);
-    this.updateWildCard();
   }
 
   ngOnDestroy() {
-    this._routeParams$.unsubscribe();
-    this._loadGame$.unsubscribe();
-    this._getRounds$.unsubscribe();
+    if (this._routeParams$) { this._routeParams$.unsubscribe(); }
+    if (this._loadGame$) { this._loadGame$.unsubscribe(); }
+    if (this._getRounds$) { this._getRounds$.unsubscribe(); }
   }
 
   private loadGame(id: string) {
@@ -57,6 +55,10 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       }
       this.game = game;
       this.teams = game.teamScores.map(ts => ts.team);
+      this._getRounds$ = this._gameService.getGameRounds(this.game.id).subscribe(rounds => {
+        this.rounds = rounds;
+        this.updateWildCard();
+      });
     });
   }
 
@@ -70,7 +72,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   }
 
   private updateWildCard(): void {
-    this.wildCard =  this.cards[(this.rounds.length - 1) % this.cards.length];
+    this.wildCard = this.cards[(this.rounds.length - 1) % this.cards.length];
   }
 
   onClose(): void {

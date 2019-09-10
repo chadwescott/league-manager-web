@@ -1,7 +1,7 @@
 <lm-page-layout>
     <div fxLayout="row">
         <div fxFlex="1 1" class="page-title">
-            Game {{game.number}}
+            Game {{game?.number}}
         </div>
         <div fxFlex>
             <button mat-raised-button type="button" color="accent" (click)="onClose()">Close</button>
@@ -9,16 +9,16 @@
     </div>
     <div fxLayout="row" fxFlexAlign="start middle">
         <div fxFlex fxLayout="column">
-            <div fxFlex *ngIf="game.gameSettings.scoreSystem === ScoreSystem.AdHoc">
+            <div fxFlex *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.AdHoc">
                 <lm-game-score-summary [game]="game" [teamScores]="game.teamScores"></lm-game-score-summary>
             </div>
-            <div fxFlex *ngIf="game.gameSettings.scoreSystem === ScoreSystem.Rounds">
+            <div fxFlex *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.Rounds">
                 <lm-game-round-list [game]="game" [rounds]="rounds"></lm-game-round-list>
             </div>
         </div>
         <div fxFlex fxLayout="column" fxFlexAlign="start start">
             <lm-wild-card-indicator class="section" [wildCard]="wildCard"></lm-wild-card-indicator>
-            <lm-game-round-form [gameRound]="rounds[rounds.length - 1]" (addRound)="onAddRound()">
+            <lm-game-round-form *ngIf="rounds && rounds.length > 0" [gameRound]="rounds[rounds.length - 1]" (addRound)="onAddRound()">
             </lm-game-round-form>
         </div>
     </div>

@@ -99,12 +99,10 @@ export class GameService {
 
     for (let i = 0; i < rounds.length; i++) {
       for (let j = 0; j < rounds[i].teamScores.length; j++) {
-        console.log(rounds[i].teamScores[j].score);
         teamScores[j].score += Number(rounds[i].teamScores[j].score);
       }
     }
 
-    // console.log(teamScores);
     game.teamScores = teamScores;
   }
 
