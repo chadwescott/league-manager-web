@@ -8,6 +8,7 @@ import { Game } from 'src/app/core/models/game';
 import { GameRound } from 'src/app/core/models/game-round';
 import { GameRoundListComponent } from '../../components/game-round-list/game-round-list.component';
 import { Team } from 'src/app/core/models/teams';
+import { ScoreSystem } from 'src/app/core/enums/score-system';
 
 @Component({
   selector: 'lm-game-details',
@@ -21,6 +22,8 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   teams: Team[];
   rounds: GameRound[];
   wildCard: string;
+
+  ScoreSystem = ScoreSystem;
 
   private cards: string[] = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 

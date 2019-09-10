@@ -6,7 +6,7 @@
     </ng-container>
   </ng-container>
   <ng-container *ngIf="showForm">
-    <lm-game-form minTeams="2" maxTeams="5" [teams]="teams" (gameSaved)="saveGame($event)"
+    <lm-game-form [gameSettings]="gameSettings" [teams]="teams" (gameSaved)="saveGame($event)"
       (cancelled)="onCreateGameCancelled()"></lm-game-form>
   </ng-container>
 </lm-page-layout>

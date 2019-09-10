@@ -5,6 +5,9 @@ import { Game } from 'src/app/core/models/game';
 import { Team } from 'src/app/core/models/teams';
 import { TeamService } from 'src/app/team/team.service';
 import { RouterService } from 'src/app/routing/services/router-service/router.service';
+import { GameSettings } from 'src/app/core/models/game-settings';
+import { ScoreSystem } from 'src/app/core/enums/score-system';
+import { WinCondition } from 'src/app/core/enums/win-condition';
 
 @Component({
   selector: 'lm-game-home',
@@ -14,6 +17,7 @@ import { RouterService } from 'src/app/routing/services/router-service/router.se
 export class GameHomeComponent implements OnInit, OnDestroy {
   public games: Game[];
   public teams: Team[];
+  public gameSettings: GameSettings = new GameSettings(2, 5, ScoreSystem.Rounds, WinCondition.ScoreLimit);
 
   private _getGames$: Subscription;
   private _getTeams$: Subscription;

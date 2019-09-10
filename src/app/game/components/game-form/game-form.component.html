@@ -2,7 +2,7 @@
     <div class="card-panel-title" fxLayout="column" fxLayoutAlign="center">Create a Game</div>
     <div class="card-panel-body padded">
         <form novalidate #f="ngForm">
-            <div class="form-group" *ngIf="minTeams != maxTeams">
+            <div class="form-group" *ngIf="gameSettings.minTeams != gameSettings.maxTeams">
                 <mat-form-field>
                     <mat-label>Number of Teams</mat-label>
                     <mat-select [(value)]="numberOfTeams" (selectionChange)="numberOfTeamsChanged()">

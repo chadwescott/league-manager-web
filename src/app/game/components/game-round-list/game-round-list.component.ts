@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { GameRound } from 'src/app/core/models/game-round';
 import { MatTable } from '@angular/material';
+import { Game } from 'src/app/core/models/game';
 
 @Component({
   selector: 'lm-game-round-list',
@@ -8,6 +9,7 @@ import { MatTable } from '@angular/material';
   styleUrls: ['./game-round-list.component.scss']
 })
 export class GameRoundListComponent implements OnInit {
+  @Input() game: Game;
   @Input() rounds: GameRound[];
 
   @ViewChild(MatTable, { static: true}) table: MatTable<GameRound[]>;

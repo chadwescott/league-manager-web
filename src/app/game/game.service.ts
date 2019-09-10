@@ -5,6 +5,9 @@ import { GameRound } from '../core/models/game-round';
 import { TeamRoundScore } from '../core/models/team-round-score';
 import { Team } from '../core/models/teams';
 import { GameTeamScore } from '../core/models/game-team-score';
+import { GameSettings } from '../core/models/game-settings';
+import { ScoreSystem } from '../core/enums/score-system';
+import { WinCondition } from '../core/enums/win-condition';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +19,7 @@ export class GameService {
   private _gameRounds: { [gameId: string]: GameRound[]; } = {};
   private _gameNumber = 0;
   private _separator = '_';
+  private _gameSettings: GameSettings = new GameSettings(2, 5, ScoreSystem.Rounds, WinCondition.ScoreLimit);
 
   constructor() {
     const game = new Game('1', 1,
@@ -24,7 +28,7 @@ export class GameService {
         new GameTeamScore('2', '2', this._team2)
       ],
       new Date(Date.now()),
-      null);
+      this._gameSettings);
     this.createGame(game);
   }
 
@@ -136,41 +140,4 @@ export class GameService {
     getGame$.unsubscribe();
     return of(gameRound);
   }
-
-  // public createRoundTeamScore(teamRoundScore: TeamRoundScore): Observable<TeamRoundScore> {
-  //   const gameRound = teamRoundScore.gameRound;
-
-  //   if (gameRound == null) { return; }
-
-  //   if (this._teamRoundScores[gameRound.id] == null) {
-  //     this._teamRoundScores[gameRound.id] = [];
-  //   }
-
-  //   this._teamRoundScores[gameRound.id].push(teamRoundScore);
-
-  //   return of(teamRoundScore);
-  // }
-
-  // public deleteRoundTeamScore(gameId: string, teamRoundScore: TeamRoundScore): void {
-  //   this.gameRoundScoreAction(gameId, teamRoundScore, (gameRoundId, index) => this._teamRoundScores[gameRoundId].splice(index, 1));
-  // }
-
-  // public editRoundTeamScore(gameId: string, teamRoundScore: TeamRoundScore): Observable<TeamRoundScore> {
-  //   this.gameRoundScoreAction(gameId, teamRoundScore, (gameRoundId, index) => this._teamRoundScores[gameRoundId][index] = teamRoundScore);
-  //   return of(teamRoundScore);
-  // }
-
-  // private gameRoundScoreAction(gameId: string, teamRoundScore: TeamRoundScore, action: (gameRoundId, index) => {}): void {
-  //   const getGameRoundById$ = this.getGameRoundById(gameId, teamRoundScore.gameRound.id).subscribe(gameRound => {
-  //     if (gameRound == null) { return; }
-
-  //     if (this._teamRoundScores[gameRound.id] == null) { return; }
-  //     const index = this._teamRoundScores[gameRound.id].findIndex(x => x.id === teamRoundScore.id);
-  //     if (index < 0) { return; }
-
-  //     action(gameRound.id, index);
-  //   });
-
-  //   getGameRoundById$.unsubscribe();
-  // }
 }

@@ -1,11 +1,19 @@
 <lm-page-layout>
+    <div fxLayout="row">
+        <div fxFlex="1 1" class="page-title">
+            Game {{game.number}}
+        </div>
+        <div fxFlex>
+            <button mat-raised-button type="button" color="accent" (click)="onClose()">Close</button>
+        </div>
+    </div>
     <div fxLayout="row" fxFlexAlign="start middle">
         <div fxFlex fxLayout="column">
-            <div fxFlex>
+            <div fxFlex *ngIf="game.gameSettings.scoreSystem === ScoreSystem.AdHoc">
                 <lm-game-score-summary [game]="game" [teamScores]="game.teamScores"></lm-game-score-summary>
             </div>
-            <div fxFlex>
-                <lm-game-round-list [rounds]="rounds"></lm-game-round-list>
+            <div fxFlex *ngIf="game.gameSettings.scoreSystem === ScoreSystem.Rounds">
+                <lm-game-round-list [game]="game" [rounds]="rounds"></lm-game-round-list>
             </div>
         </div>
         <div fxFlex fxLayout="column" fxFlexAlign="start start">
@@ -14,5 +22,4 @@
             </lm-game-round-form>
         </div>
     </div>
-    <button mat-raised-button type="button" color="accent" (click)="onClose()">Close</button>
 </lm-page-layout>

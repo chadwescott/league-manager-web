@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Game } from 'src/app/core/models/game';
 import { Team } from 'src/app/core/models/teams';
 import { GameTeamScore } from 'src/app/core/models/game-team-score';
+import { GameSettings } from 'src/app/core/models/game-settings';
 
 @Component({
   selector: 'lm-game-form',
@@ -9,8 +10,7 @@ import { GameTeamScore } from 'src/app/core/models/game-team-score';
   styleUrls: ['./game-form.component.scss']
 })
 export class GameFormComponent implements OnInit {
-  @Input() minTeams: number;
-  @Input() maxTeams: number;
+  @Input() gameSettings: GameSettings;
   @Input() teams: Team[];
 
   @Output() gameSaved = new EventEmitter<Game>();
@@ -25,11 +25,11 @@ export class GameFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    for (let i = this.minTeams; i <= this.maxTeams; i++) {
+    for (let i = this.gameSettings.minTeams; i <= this.gameSettings.maxTeams; i++) {
       this.numberOfTeamsOptions.push(i);
     }
 
-    this.numberOfTeams = this.minTeams;
+    this.numberOfTeams = this.gameSettings.minTeams;
     this.numberOfTeamsChanged();
   }
 
@@ -60,7 +60,7 @@ export class GameFormComponent implements OnInit {
 
     const teamScores = this.teamEntrants.map(x => new GameTeamScore('', '', x));
 
-    const game = new Game('', 0, teamScores, new Date(Date.now()), null);
+    const game = new Game('', 0, teamScores, new Date(Date.now()), this.gameSettings);
     this.gameSaved.emit(game);
   }
 
