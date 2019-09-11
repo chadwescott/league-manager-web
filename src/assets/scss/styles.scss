@@ -56,8 +56,8 @@ body {
 }
 
 .card-panel-title .mat-icon-button {
-  height: 24px;
-  width: 24px;
+  height: 28px;
+  width: 28px;
   line-height: 18px;
   margin-top: -2px;
 
@@ -69,15 +69,30 @@ body {
   }}
 
 .mat-header-cell .mat-icon-button {
-  height: 24px;
-  width: 24px;
-  line-height: 18px;
+  height: 28px;
+  width: 28px;
+  line-height: 20px;
+  color: $accent-color;
 
   .mat-icon {
-    font-size: 18px;
-    height: 18px;
-    width: 18px;
-    line-height: 18px;
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+    line-height: 20px;
+  }
+}
+
+.mat-cell .mat-icon-button {
+  height: 28px;
+  width: 28px;
+  line-height: 20px;
+  color: $accent-color;
+
+  .mat-icon {
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+    line-height: 20px;
   }
 }
 

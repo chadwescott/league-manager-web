@@ -34,13 +34,16 @@ export class RouterService {
     this.changePage(`games/${id}`);
   }
 
-
   public showHome() {
     this.changePage('');
   }
 
   public showLeagues() {
     this.changePage('leagues');
+  }
+
+  public showLeague(id: string) {
+    this.changePage(`leagues/${id}`);
   }
 
   public showSignIn() {

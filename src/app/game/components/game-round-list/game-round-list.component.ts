@@ -13,17 +13,19 @@ export class GameRoundListComponent implements OnInit {
   @Input() rounds: GameRound[];
 
   @Output() addRound = new EventEmitter();
+  @Output() editRound = new EventEmitter<GameRound>();
+  @Output() deleteRound = new EventEmitter<GameRound>();
 
   @ViewChild(MatTable, { static: true}) table: MatTable<GameRound[]>;
 
-  displayedColumns: string[] = ['round'];
+  displayedColumns: string[] = ['round', 'actions'];
 
   constructor() { }
 
   ngOnInit() {
     if (this.rounds.length > 0) {
       for (let i = 0; i < this.rounds[0].teamScores.length; i++) {
-        this.displayedColumns.push(this.rounds[0].teamScores[i].team.id);
+        this.displayedColumns.splice(this.rounds.length - 2, 0, this.rounds[0].teamScores[i].team.id);
       }
     }
   }
@@ -34,5 +36,13 @@ export class GameRoundListComponent implements OnInit {
 
   onAddRound(): void {
     this.addRound.emit();
+  }
+
+  onEditRound(round: GameRound) {
+    this.editRound.emit(round);
+  }
+
+  onDeleteRound(round: GameRound) {
+    this.deleteRound.emit(round);
   }
 }

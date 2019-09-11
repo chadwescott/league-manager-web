@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GameRound } from 'src/app/core/models/game-round';
 
 @Component({
@@ -9,8 +9,14 @@ import { GameRound } from 'src/app/core/models/game-round';
 export class GameRoundFormComponent implements OnInit {
   @Input() gameRound: GameRound;
 
+  @Output() scoreChanged = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onScoreChanged(): void {
+    this.scoreChanged.emit();
   }
 }

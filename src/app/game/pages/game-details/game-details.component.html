@@ -13,13 +13,14 @@
                 <lm-game-score-summary [game]="game" [teamScores]="game.teamScores"></lm-game-score-summary>
             </div>
             <div fxFlex *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.Rounds">
-                <lm-game-round-list [game]="game" [rounds]="rounds" (addRound)="onAddRound()"></lm-game-round-list>
+                <lm-game-round-list [game]="game" [rounds]="rounds" (addRound)="onAddRound()"
+                    (editRound)="onEditRound($event)" (deleteRound)="onDeleteRound($event)">
+                </lm-game-round-list>
             </div>
         </div>
         <div fxFlex fxLayout="column" fxFlexAlign="start start">
             <lm-wild-card-indicator class="section" [wildCard]="wildCard"></lm-wild-card-indicator>
-            <lm-game-round-form *ngIf="rounds && rounds.length > 0" [gameRound]="rounds[rounds.length - 1]" (addRound)="onAddRound()">
-            </lm-game-round-form>
+            <lm-game-round-form *ngIf="selectedRound" [gameRound]="selectedRound" (scoreChanged)="onScoreChanged()"></lm-game-round-form>
         </div>
     </div>
 </lm-page-layout>

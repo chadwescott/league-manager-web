@@ -22,6 +22,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   teams: Team[];
   rounds: GameRound[];
   wildCard: string;
+  selectedRound: GameRound;
 
   ScoreSystem = ScoreSystem;
 
@@ -29,7 +30,6 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
 
   private _routeParams$: Subscription;
   private _loadGame$: Subscription;
-  private _getRounds$: Subscription;
 
   constructor(
     private _gameService: GameService,
@@ -44,7 +44,6 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this._routeParams$) { this._routeParams$.unsubscribe(); }
     if (this._loadGame$) { this._loadGame$.unsubscribe(); }
-    if (this._getRounds$) { this._getRounds$.unsubscribe(); }
   }
 
   private loadGame(id: string) {
@@ -55,20 +54,37 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       }
       this.game = game;
       this.teams = game.teamScores.map(ts => ts.team);
-      this._getRounds$ = this._gameService.getGameRounds(this.game.id).subscribe(rounds => {
-        this.rounds = rounds;
-        this.updateWildCard();
-      });
+      this.updateRounds();
     });
   }
 
   onAddRound(): void {
-    const createRound$ = this._gameService.createRound(this.game).subscribe(() =>
-      this._gameService.getGameRounds(this.game.id).subscribe(rounds => this.rounds = rounds)
-    );
+    const createRound$ = this._gameService.createRound(this.game).subscribe(x => {
+      this.selectedRound = x;
+      this.updateRounds();
+    });
     createRound$.unsubscribe();
-    this.gameRoundList.updateRounds();
-    this.updateWildCard();
+  }
+
+  private updateRounds(): void {
+    this._gameService.getGameRounds(this.game.id).subscribe(rounds => {
+      this.rounds = rounds;
+      this.updateWildCard();
+      if (this.gameRoundList) { this.gameRoundList.updateRounds(); }
+    });
+  }
+
+  onScoreChanged() {
+    this._gameService.updateGameScores(this.game);
+  }
+
+  onEditRound(round: GameRound): void {
+    this.selectedRound = round;
+  }
+
+  onDeleteRound(round: GameRound): void {
+    if (this.selectedRound === round) { this.selectedRound = null; }
+    this._gameService.deleteRound(round).subscribe(() => this.updateRounds());
   }
 
   private updateWildCard(): void {

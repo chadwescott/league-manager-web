@@ -3,7 +3,7 @@
         <div class="form-group">
             <mat-form-field>
                 <mat-label>{{teamScore.team.name}}'s score</mat-label>
-                <input matInput type="text" lmNumericInput [(ngModel)]="teamScore.score" />
+                <input matInput type="text" lmNumericInput [(ngModel)]="teamScore.score" (change)="onScoreChanged()" />
             </mat-form-field>
         </div>
     </ng-container>

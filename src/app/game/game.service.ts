@@ -87,12 +87,11 @@ export class GameService {
       new TeamRoundScore(`${id}${this._separator}${index}`, teamScore.team, 0));
 
     this._gameRounds[game.id].push(gameRound);
-    this.updateGameTeamScores(game);
 
     return of(gameRound);
   }
 
-  private updateGameTeamScores(game: Game): void {
+  public updateGameScores(game: Game): void {
     const rounds = this._gameRounds[game.id];
     if (rounds.length === 0) { return; }
     const teamScores = rounds[0].teamScores.map(x => new GameTeamScore('', game.id, x.team));
@@ -106,7 +105,7 @@ export class GameService {
     game.teamScores = teamScores;
   }
 
-  public deleteRound(gameRound: GameRound): void {
+  public deleteRound(gameRound: GameRound): Observable<boolean> {
     const gameId = gameRound.gameId;
     const getGame$ = this.getGameById(gameId).subscribe(game => {
       if (game == null) { return; }
@@ -117,9 +116,12 @@ export class GameService {
       if (index < 0) { return; }
 
       this._gameRounds[gameId].splice(index, 1);
+      this.updateRoundNumbers(this._gameRounds[gameId]);
+      this.updateGameScores(game);
     });
 
     getGame$.unsubscribe();
+    return of(true);
   }
 
   public editRound(gameRound: GameRound): Observable<GameRound> {
@@ -137,5 +139,11 @@ export class GameService {
 
     getGame$.unsubscribe();
     return of(gameRound);
+  }
+
+  private updateRoundNumbers(rounds: GameRound[]): void {
+    for (let i = 0; i < rounds.length; i++) {
+      rounds[i].number = i + 1;
+    }
   }
 }
