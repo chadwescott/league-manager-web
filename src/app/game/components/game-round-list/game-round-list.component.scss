@@ -1,5 +1,9 @@
 @import "../../../../assets//scss/styles.scss";
 
+th.mat-header-cell > button.mat-icon-button .mat-icon {
+  margin-top: -2px;
+}
+
 tr.mat-footer-row {
   font-weight: bold;
 }
