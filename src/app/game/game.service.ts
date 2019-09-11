@@ -93,8 +93,7 @@ export class GameService {
 
   public updateGameScores(game: Game): void {
     const rounds = this._gameRounds[game.id];
-    if (rounds.length === 0) { return; }
-    const teamScores = rounds[0].teamScores.map(x => new GameTeamScore('', game.id, x.team));
+    const teamScores = game.teamScores.map(x => new GameTeamScore('', game.id, x.team));
 
     for (let i = 0; i < rounds.length; i++) {
       for (let j = 0; j < rounds[i].teamScores.length; j++) {

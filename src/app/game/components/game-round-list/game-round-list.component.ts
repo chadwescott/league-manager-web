@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angu
 import { GameRound } from 'src/app/core/models/game-round';
 import { MatTable } from '@angular/material';
 import { Game } from 'src/app/core/models/game';
+import { Team } from 'src/app/core/models/teams';
 
 @Component({
   selector: 'lm-game-round-list',
@@ -10,23 +11,23 @@ import { Game } from 'src/app/core/models/game';
 })
 export class GameRoundListComponent implements OnInit {
   @Input() game: Game;
-  @Input() rounds: GameRound[];
+  @Input() rounds: GameRound[] = [];
 
   @Output() addRound = new EventEmitter();
   @Output() editRound = new EventEmitter<GameRound>();
   @Output() deleteRound = new EventEmitter<GameRound>();
 
-  @ViewChild(MatTable, { static: true}) table: MatTable<GameRound[]>;
+  @ViewChild(MatTable, { static: true }) table: MatTable<GameRound[]>;
 
+  teams: Team[];
   displayedColumns: string[] = ['round', 'actions'];
 
   constructor() { }
 
   ngOnInit() {
-    if (this.rounds.length > 0) {
-      for (let i = 0; i < this.rounds[0].teamScores.length; i++) {
-        this.displayedColumns.splice(this.rounds.length - 2, 0, this.rounds[0].teamScores[i].team.id);
-      }
+    this.teams = this.game.teamScores.map(x => x.team);
+    for (let i = 0; i < this.game.teamScores.length; i++) {
+      this.displayedColumns.splice(this.displayedColumns.length - 1, 0, this.game.teamScores[i].team.id);
     }
   }
 

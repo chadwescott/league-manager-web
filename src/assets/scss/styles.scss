@@ -50,11 +50,6 @@ body {
   color: white;
 }
 
-.summary-card-panel-title {
-  @extend .card-panel-title;
-  height: 30px;
-}
-
 .card-panel-title .mat-icon-button {
   height: 28px;
   width: 28px;
@@ -66,7 +61,21 @@ body {
     height: 18px;
     width: 18px;
     line-height: 18px;
-  }}
+  }
+}
+
+.card-panel-title .material-icons {
+  margin-top: -2px;
+}
+
+.padded {
+  padding: 8px;
+}
+
+.card-panel-body .content {
+  border: inset 4px $primary-color;
+  background-color: $content-color;
+}
 
 .mat-header-cell .mat-icon-button {
   height: 28px;
@@ -96,21 +105,14 @@ body {
   }
 }
 
-.card-panel-title .material-icons {
-  margin-top: -2px;
-}
-
 div .section {
   padding-bottom: 8px;
 }
 
-.card-panel-body {
-  border: solid 1px black;
-  border-radius: 0 0 4px 4px;
-  background-color: $content-color;
-  &.padded {
-    padding: 8px;
-  }
+.section-header {
+  font-size: large;
+  font-weight: 600;
+  padding-bottom: 4px;
 }
 
 tr.mat-header-row {

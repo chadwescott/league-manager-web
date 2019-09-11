@@ -1,26 +1,34 @@
 <lm-page-layout>
-    <div fxLayout="row">
-        <div fxFlex="1 1" class="page-title">
-            Game {{game?.number}}
-        </div>
-        <div fxFlex>
-            <button mat-raised-button type="button" color="accent" (click)="onClose()">Close</button>
-        </div>
-    </div>
-    <div fxLayout="row" fxFlexAlign="start middle">
-        <div fxFlex fxLayout="column">
-            <div fxFlex *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.AdHoc">
-                <lm-game-score-summary [game]="game" [teamScores]="game.teamScores"></lm-game-score-summary>
+    <div lmCardPanel>
+        <div lmCardPanelTitle fxLayout="row">
+            <div fxFlex="1 1">
+                Game {{game?.number}}
             </div>
-            <div fxFlex *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.Rounds">
-                <lm-game-round-list [game]="game" [rounds]="rounds" (addRound)="onAddRound()"
-                    (editRound)="onEditRound($event)" (deleteRound)="onDeleteRound($event)">
-                </lm-game-round-list>
+            <div fxFlex>
+                <button mat-icon-button aria-label="Close" (click)="onClose()">
+                    <mat-icon>close</mat-icon>
+                </button>
             </div>
         </div>
-        <div fxFlex fxLayout="column" fxFlexAlign="start start">
-            <lm-wild-card-indicator class="section" [wildCard]="wildCard"></lm-wild-card-indicator>
-            <lm-game-round-form *ngIf="selectedRound" [gameRound]="selectedRound" (scoreChanged)="onScoreChanged()"></lm-game-round-form>
+        <div class="card-panel-body">
+            <div fxLayout="row wrap" fxLayoutGap="10px">
+                <div fxFlex fxLayout="column">
+                    <div class="content" fxFlex *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.AdHoc">
+                        <lm-game-score-summary [game]="game" [teamScores]="game.teamScores"></lm-game-score-summary>
+                    </div>
+                    <div class="content" fxFlex *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.Rounds">
+                        <lm-game-round-list [game]="game" [rounds]="rounds" (addRound)="onAddRound()"
+                            (editRound)="onEditRound($event)" (deleteRound)="onDeleteRound($event)">
+                        </lm-game-round-list>
+                    </div>
+                </div>
+                <div lmPadded class="content" fxFlex fxLayout="column" fxFlexAlign="start start">
+                    <lm-wild-card-indicator class="section" [wildCard]="wildCard"></lm-wild-card-indicator>
+                    <lm-game-round-form *ngIf="selectedRound" class="section" [gameRound]="selectedRound"
+                        (scoreChanged)="onScoreChanged()">
+                    </lm-game-round-form>
+                </div>
+            </div>
         </div>
     </div>
 </lm-page-layout>

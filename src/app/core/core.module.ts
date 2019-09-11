@@ -9,16 +9,26 @@ import { RoutingModule } from '../routing/routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { MenuCardComponent } from './components/menu-card/menu-card.component';
-import { NumericInputDirective } from './directives/numeric-input.directive';
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
+
+// Directives
+import { CardPanelDirective } from './directives/card-panel.directive';
+import { CardPanelTitleDirective } from './directives/card-panel-title.directive';
+import { NumericInputDirective } from './directives/numeric-input.directive';
+import { PaddedDirective } from './directives/padded.directive';
+import { SectionHeaderDirective } from './directives/section-header.directive';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     MenuComponent,
     MenuCardComponent,
+    PageLayoutComponent,
+    CardPanelDirective,
+    CardPanelTitleDirective,
     NumericInputDirective,
-    PageLayoutComponent
+    PaddedDirective,
+    SectionHeaderDirective
   ],
   imports: [
     CommonModule,
@@ -32,8 +42,12 @@ import { PageLayoutComponent } from './components/page-layout/page-layout.compon
     MaterialModule,
     MenuComponent,
     MenuCardComponent,
+    PageLayoutComponent,
+    CardPanelDirective,
+    CardPanelTitleDirective,
     NumericInputDirective,
-    PageLayoutComponent
+    PaddedDirective,
+    SectionHeaderDirective
   ]
 })
 export class CoreModule { }

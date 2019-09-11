@@ -59,16 +59,19 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   }
 
   onAddRound(): void {
-    const createRound$ = this._gameService.createRound(this.game).subscribe(x => {
+    this._gameService.createRound(this.game).subscribe(x => {
       this.selectedRound = x;
       this.updateRounds();
     });
-    createRound$.unsubscribe();
   }
 
   private updateRounds(): void {
     this._gameService.getGameRounds(this.game.id).subscribe(rounds => {
       this.rounds = rounds;
+
+      if (this.rounds && this.rounds.length > 0 && !this.selectedRound) {
+        this.selectedRound = this.rounds[this.rounds.length - 1];
+      }
       this.updateWildCard();
       if (this.gameRoundList) { this.gameRoundList.updateRounds(); }
     });
