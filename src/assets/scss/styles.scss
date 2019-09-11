@@ -42,19 +42,20 @@ body {
 }
 
 .card-panel-title {
-  height: 30px;
+  height: 24px;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: large;
   padding-bottom: 4px;
   padding-left: 4px;
   color: white;
+  margin-top: 2px;
 }
 
 .card-panel-title .mat-icon-button {
   height: 28px;
   width: 28px;
   line-height: 18px;
-  margin-top: -2px;
+  margin-top: -4px;
 
   .mat-icon {
     font-size: 18px;
@@ -72,7 +73,7 @@ body {
   padding: 8px;
 }
 
-.card-panel-body .content {
+.card-panel-body .card-panel-content {
   border: inset 4px $primary-color;
   background-color: $content-color;
 }

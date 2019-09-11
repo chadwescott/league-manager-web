@@ -17,6 +17,8 @@ import { CardPanelTitleDirective } from './directives/card-panel-title.directive
 import { NumericInputDirective } from './directives/numeric-input.directive';
 import { PaddedDirective } from './directives/padded.directive';
 import { SectionHeaderDirective } from './directives/section-header.directive';
+import { CardPanelBodyDirective } from './directives/card-panel-body.directive';
+import { CardPanelContentDirective } from './directives/card-panel-content.directive';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { SectionHeaderDirective } from './directives/section-header.directive';
     MenuComponent,
     MenuCardComponent,
     PageLayoutComponent,
+    CardPanelBodyDirective,
+    CardPanelContentDirective,
     CardPanelDirective,
     CardPanelTitleDirective,
     NumericInputDirective,
@@ -43,6 +47,8 @@ import { SectionHeaderDirective } from './directives/section-header.directive';
     MenuComponent,
     MenuCardComponent,
     PageLayoutComponent,
+    CardPanelBodyDirective,
+    CardPanelContentDirective,
     CardPanelDirective,
     CardPanelTitleDirective,
     NumericInputDirective,

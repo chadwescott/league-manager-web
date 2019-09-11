@@ -1,12 +1,26 @@
 <lm-page-layout>
   <ng-container *ngIf="!showForm">
     <ng-container *ngIf="!selectedGame">
-      <lm-game-list [games]="games" (selectedGame)="gameSelected($event)"></lm-game-list>
+      <div lmCardPanel>
+        <div lmCardPanelTitle>Games</div>
+        <div lmCardPanelBody>
+          <div lmCardPanelContent>
+            <lm-game-list [games]="games" (selectedGame)="gameSelected($event)"></lm-game-list>
+          </div>
+        </div>
+      </div>
       <button mat-raised-button type="button" color="accent" (click)="showForm = true">Add Game</button>
     </ng-container>
   </ng-container>
   <ng-container *ngIf="showForm">
-    <lm-game-form [gameSettings]="gameSettings" [teams]="teams" (gameSaved)="saveGame($event)"
-      (cancelled)="onCreateGameCancelled()"></lm-game-form>
+    <div lmCardPanel>
+      <div lmCardPanelTitle>Create a Game</div>
+      <div lmCardPanelBody>
+        <div lmCardPanelContent lmPadded>
+          <lm-game-form [gameSettings]="gameSettings" [teams]="teams" (gameSaved)="saveGame($event)"
+            (cancelled)="onCreateGameCancelled()"></lm-game-form>
+        </div>
+      </div>
+    </div>
   </ng-container>
 </lm-page-layout>

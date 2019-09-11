@@ -1,15 +1,19 @@
-<div class="league-details-card-panel">
-  <div class="card-panel-title" fxLayout="row">
-    <div fxFlex="1 1 100%" fxLayout="column" fxLayoutAlign="center">
-      {{league?.name}}
-    </div>
-    <div fxFlex>
-      <button mat-icon-button aria-label="Close" (click)="close()">
-        <mat-icon>close</mat-icon>
-      </button>
+<div lmCardPanel>
+  <div lmCardPanelTitle>
+    <div fxLayout="row">
+      <div fxFlex="1 1" fxLayout="column">
+        {{league?.name}}
+      </div>
+      <div fxFlex>
+        <button mat-icon-button aria-label="Close" (click)="close()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
-  <div class="card-panel-body">
-    <ng-content></ng-content>
+  <div lmCardPanelBody>
+    <div lmCardPanelContent>
+      <ng-content></ng-content>
+    </div>
   </div>
 </div>

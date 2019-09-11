@@ -1,6 +1,13 @@
 <lm-page-layout>
   <ng-container *ngIf="!selectedLeague">
-    <lm-league-list [leagues]="leagues" (selectedLeague)="leagueSelected($event)"></lm-league-list>
+    <div lmCardPanel>
+      <div lmCardPanelTitle>Leagues</div>
+      <div lmCardPanelBody>
+        <div lmCardPanelContent>
+          <lm-league-list [leagues]="leagues" (selectedLeague)="leagueSelected($event)"></lm-league-list>
+        </div>
+      </div>
+    </div>
   </ng-container>
   <ng-container *ngIf="selectedLeague">
     <lm-league-details [league]="selectedLeague" (leagueClosed)="clearSelectedLeague()">
