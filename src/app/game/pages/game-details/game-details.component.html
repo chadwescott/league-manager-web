@@ -13,7 +13,7 @@
                 <lm-game-score-summary [game]="game" [teamScores]="game.teamScores"></lm-game-score-summary>
             </div>
             <div fxFlex *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.Rounds">
-                <lm-game-round-list [game]="game" [rounds]="rounds"></lm-game-round-list>
+                <lm-game-round-list [game]="game" [rounds]="rounds" (addRound)="onAddRound()"></lm-game-round-list>
             </div>
         </div>
         <div fxFlex fxLayout="column" fxFlexAlign="start start">

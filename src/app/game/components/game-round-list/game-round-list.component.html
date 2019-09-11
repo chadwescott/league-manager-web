@@ -3,7 +3,11 @@
     <div class="card-panel-body scrollable">
         <table mat-table [dataSource]="rounds">
             <ng-container matColumnDef="round">
-                <th mat-header-cell *matHeaderCellDef>Round</th>
+                <th mat-header-cell *matHeaderCellDef>
+                    Round <button mat-icon-button aria-label="Add Round" type="button" title="Add Round" (click)="onAddRound()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </th>
                 <td mat-cell *matCellDef="let round">{{round.number}}</td>
                 <td mat-footer-cell *matFooterCellDef>Total</td>
             </ng-container>

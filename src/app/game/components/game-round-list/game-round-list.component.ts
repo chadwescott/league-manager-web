@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { GameRound } from 'src/app/core/models/game-round';
 import { MatTable } from '@angular/material';
 import { Game } from 'src/app/core/models/game';
@@ -11,6 +11,8 @@ import { Game } from 'src/app/core/models/game';
 export class GameRoundListComponent implements OnInit {
   @Input() game: Game;
   @Input() rounds: GameRound[];
+
+  @Output() addRound = new EventEmitter();
 
   @ViewChild(MatTable, { static: true}) table: MatTable<GameRound[]>;
 
@@ -28,5 +30,9 @@ export class GameRoundListComponent implements OnInit {
 
   updateRounds() {
     this.table.renderRows();
+  }
+
+  onAddRound(): void {
+    this.addRound.emit();
   }
 }

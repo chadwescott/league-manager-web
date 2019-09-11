@@ -12,6 +12,7 @@ body {
 
 body {
   margin: 0;
+  background-color: whitesmoke;
 }
 
 .scrollable {
@@ -55,10 +56,29 @@ body {
 }
 
 .card-panel-title .mat-icon-button {
-  height: 30px;
-  width: 30px;
-  line-height: 30px;
+  height: 24px;
+  width: 24px;
+  line-height: 18px;
   margin-top: -2px;
+
+  .mat-icon {
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+    line-height: 18px;
+  }}
+
+.mat-header-cell .mat-icon-button {
+  height: 24px;
+  width: 24px;
+  line-height: 18px;
+
+  .mat-icon {
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+    line-height: 18px;
+  }
 }
 
 .card-panel-title .material-icons {
