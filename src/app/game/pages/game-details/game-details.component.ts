@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { trigger, transition, useAnimation, query } from '@angular/animations';
 
 import { RouterService } from 'src/app/routing/services/router-service/router.service';
 import { GameService } from '../../game.service';
@@ -9,11 +10,31 @@ import { GameRound } from 'src/app/core/models/game-round';
 import { GameRoundListComponent } from '../../components/game-round-list/game-round-list.component';
 import { Team } from 'src/app/core/models/teams';
 import { ScoreSystem } from 'src/app/core/enums/score-system';
+import { fadeInAnimation } from 'src/app/core/animations/fade-in-animation';
+import { fadeOutAnimation } from 'src/app/core/animations/fade-out-animation';
 
 @Component({
   selector: 'lm-game-details',
   templateUrl: './game-details.component.html',
-  styleUrls: ['./game-details.component.scss']
+  styleUrls: ['./game-details.component.scss'],
+  animations: [
+    trigger('roundChanged', [
+      transition(':enter', [
+        query('.card-panel-content', [
+          useAnimation(fadeInAnimation, {
+            params: { timings: '800ms ease-in-out' }
+          })
+        ])
+      ]),
+      transition(':leave', [
+        query('.card-panel-content', [
+          useAnimation(fadeOutAnimation, {
+            params: { timings: '800ms ease-in-out' }
+          })
+        ])
+      ])
+    ])
+  ]
 })
 export class GameDetailsComponent implements OnInit, OnDestroy {
   @ViewChild(GameRoundListComponent, { static: false }) gameRoundList: GameRoundListComponent;

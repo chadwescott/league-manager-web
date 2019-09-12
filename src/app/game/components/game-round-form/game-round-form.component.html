@@ -1,9 +1,14 @@
-<div lmSectionHeader>Round {{gameRound.number}}</div>
-<ng-container *ngFor="let teamScore of gameRound.teamScores">
-    <div class="form-group">
-        <mat-form-field>
-            <mat-label>{{teamScore.team.name}}'s score</mat-label>
-            <input matInput type="text" lmNumericInput [(ngModel)]="teamScore.score" (change)="onScoreChanged()" />
-        </mat-form-field>
+<div style="overflow-x: hidden;">
+    <div [@roundChanged]="round?.number">
+        <div lmSectionHeader>Round {{round.number}}</div>
+        <ng-container *ngFor="let teamScore of round.teamScores">
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>{{teamScore.team.name}}'s score</mat-label>
+                    <input matInput type="text" lmNumericInput [(ngModel)]="teamScore.score"
+                        (change)="onScoreChanged()" />
+                </mat-form-field>
+            </div>
+        </ng-container>
     </div>
-</ng-container>
+</div>

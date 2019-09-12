@@ -5,8 +5,8 @@ import { Directive, ElementRef } from '@angular/core';
 })
 export class SectionHeaderDirective {
 
-  constructor(elr: ElementRef) {
-    elr.nativeElement.classList.add('section-header');
+  constructor(el: ElementRef) {
+    el.nativeElement.classList.add('section-header');
   }
 
 }

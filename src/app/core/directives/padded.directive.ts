@@ -5,8 +5,8 @@ import { Directive, ElementRef } from '@angular/core';
 })
 export class PaddedDirective {
 
-  constructor(elr: ElementRef) {
-    elr.nativeElement.classList.add('padded');
+  constructor(el: ElementRef) {
+    el.nativeElement.classList.add('padded');
   }
 
 }

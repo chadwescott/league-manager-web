@@ -5,8 +5,8 @@ import { Directive, ElementRef } from '@angular/core';
 })
 export class CardPanelContentDirective {
 
-  constructor(elr: ElementRef) {
-    elr.nativeElement.classList.add('card-panel-content');
+  constructor(el: ElementRef) {
+    el.nativeElement.classList.add('card-panel-content');
   }
 
 }
