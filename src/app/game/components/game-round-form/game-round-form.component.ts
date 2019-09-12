@@ -10,10 +10,6 @@ export class GameRoundFormComponent implements OnInit {
   @Input() gameRound: GameRound;
 
   @Output() scoreChanged = new EventEmitter();
-  @Output() first = new EventEmitter();
-  @Output() previous = new EventEmitter();
-  @Output() next = new EventEmitter();
-  @Output() last = new EventEmitter();
 
   constructor() { }
 
@@ -22,21 +18,5 @@ export class GameRoundFormComponent implements OnInit {
 
   onScoreChanged(): void {
     this.scoreChanged.emit();
-  }
-
-  onFirst() {
-    this.first.emit();
-  }
-
-  onPrevious() {
-    this.previous.emit();
-  }
-
-  onNext() {
-    this.next.emit();
-  }
-
-  onLast() {
-    this.last.emit();
   }
 }

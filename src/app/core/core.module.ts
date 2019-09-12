@@ -10,6 +10,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { MenuCardComponent } from './components/menu-card/menu-card.component';
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 // Directives
 import { CardPanelDirective } from './directives/card-panel.directive';
@@ -26,6 +27,7 @@ import { CardPanelContentDirective } from './directives/card-panel-content.direc
     MenuComponent,
     MenuCardComponent,
     PageLayoutComponent,
+    PaginatorComponent,
     CardPanelBodyDirective,
     CardPanelContentDirective,
     CardPanelDirective,
@@ -47,6 +49,7 @@ import { CardPanelContentDirective } from './directives/card-panel-content.direc
     MenuComponent,
     MenuCardComponent,
     PageLayoutComponent,
+    PaginatorComponent,
     CardPanelBodyDirective,
     CardPanelContentDirective,
     CardPanelDirective,

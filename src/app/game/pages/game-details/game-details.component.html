@@ -27,9 +27,13 @@
                 <div lmPadded lmCardPanelContent fxFlex fxLayout="column" fxFlexAlign="start start">
                     <lm-wild-card-indicator class="section" [wildCard]="wildCard"></lm-wild-card-indicator>
                     <lm-game-round-form *ngIf="selectedRound" class="section" [gameRound]="selectedRound"
-                        (scoreChanged)="onScoreChanged()" (first)="onFirstRound()" (previous)="onPreviousRound()"
-                        (next)="onNextRound()" (last)="onLastRound()">
-                    </lm-game-round-form>
+                        (scoreChanged)="onScoreChanged()"></lm-game-round-form>
+                    <lm-paginator [firstDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[0]"
+                        [previousDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[0]"
+                        [nextDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[rounds.length - 1]"
+                        [lastDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[rounds.length - 1]"
+                        (first)="onFirstRound()" (previous)="onPreviousRound()" (next)="onNextRound()"
+                        (last)="onLastRound()"></lm-paginator>
                 </div>
             </div>
         </div>
