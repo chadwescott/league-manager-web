@@ -97,4 +97,39 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   onClose(): void {
     this._routerService.showGames();
   }
+
+  onFirstRound(): void {
+    if (this.rounds && this.rounds.length > 0) {
+      this.selectedRound = this.rounds[0];
+    }
+  }
+
+  onPreviousRound(): void {
+    if (this.rounds && this.rounds.length > 0) {
+      const index = this.rounds.indexOf(this.selectedRound);
+      if (index > 0) {
+        this.selectedRound = this.rounds[index - 1];
+      }
+    }
+  }
+
+  onNextRound(): void {
+    if (this.rounds && this.rounds.length > 0) {
+      const index = this.rounds.indexOf(this.selectedRound);
+      if (index < this.rounds.length - 1) {
+        this.selectedRound = this.rounds[index + 1];
+      }
+    }
+  }
+
+  onLastRound(): void {
+    if (this.rounds && this.rounds.length > 0) {
+      this.selectedRound = this.rounds[this.rounds.length - 1];
+    }
+  }
+
+  private changeSelectedRound(index: number) {
+
+  }
+
 }

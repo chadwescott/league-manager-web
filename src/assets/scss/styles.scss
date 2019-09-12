@@ -28,7 +28,8 @@ body {
 
 .card-panel {
   @extend .mat-elevation-z6;
-  border: solid 1px black;
+  // border: solid 1px black;
+  border: outset 4px $primary-color;
   border-radius: 4px;
   padding: 4px;
   // background-color: mat-color($mat-brown, 500);

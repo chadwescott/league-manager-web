@@ -14,6 +14,7 @@ mat-toolbar {
   height: 40px;
   background-color: $primary-color;
   color: mat-color($primary, default-contrast);
+  border-bottom: outset 4px $primary-color;
 }
 
 mat-toolbar button .icon {

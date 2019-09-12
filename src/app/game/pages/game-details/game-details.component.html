@@ -27,7 +27,8 @@
                 <div lmPadded lmCardPanelContent fxFlex fxLayout="column" fxFlexAlign="start start">
                     <lm-wild-card-indicator class="section" [wildCard]="wildCard"></lm-wild-card-indicator>
                     <lm-game-round-form *ngIf="selectedRound" class="section" [gameRound]="selectedRound"
-                        (scoreChanged)="onScoreChanged()">
+                        (scoreChanged)="onScoreChanged()" (first)="onFirstRound()" (previous)="onPreviousRound()"
+                        (next)="onNextRound()" (last)="onLastRound()">
                     </lm-game-round-form>
                 </div>
             </div>
