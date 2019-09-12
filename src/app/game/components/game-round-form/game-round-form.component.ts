@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChildren, AfterViewInit } from '@angular/core';
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { GameRound } from 'src/app/core/models/game-round';
 import { fadeLeftAnimation } from 'src/app/core/animations/fade-left-animation';
@@ -23,19 +23,25 @@ import { fadeRightAnimation } from 'src/app/core/animations/fade-right-animation
     ])
   ]
 })
-export class GameRoundFormComponent implements OnInit, OnChanges {
+export class GameRoundFormComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() round: GameRound;
 
   @Output() scoreChanged = new EventEmitter();
+
+  @ViewChildren('score') scoreInputs: any;
 
   constructor() { }
 
   ngOnInit() { }
 
+  ngAfterViewInit() {
+    setTimeout(() => this.scoreInputs.first.nativeElement.select(), 100);
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     const round = changes.round;
-    if (round.currentValue !== round.previousValue) {
-
+    if (round.currentValue !== round.previousValue && this.scoreInputs) {
+      setTimeout(() => this.scoreInputs.first.nativeElement.select(), 100);
     }
   }
 
