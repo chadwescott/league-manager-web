@@ -13,7 +13,7 @@
             </div>
         </div>
         <div lmCardPanelBody>
-            <div fxLayout="row wrap" fxLayoutGap="10px">
+            <div fxLayout="row wrap" fxLayoutGap="10px" [@roundChanged]="selectedRound?.number">
                 <div fxFlex fxLayout="column">
                     <div lmCardPanelContent fxFlex *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.AdHoc">
                         <lm-game-score-summary [game]="game" [teamScores]="game.teamScores"></lm-game-score-summary>
@@ -32,7 +32,7 @@
                         <div lmPadded lmCardPanelContent>
                             <div fxFlex>
                                 <lm-game-round-form class="section" [round]="selectedRound"
-                                    (scoreChanged)="onScoreChanged()"></lm-game-round-form>
+                                    (scoreChanged)="onScoreChanged()" (scoreEntered)="onAddRound()"></lm-game-round-form>
                                 <lm-paginator *ngIf="selectedRound"
                                     [firstDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[0]"
                                     [previousDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[0]"

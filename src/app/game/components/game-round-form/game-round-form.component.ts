@@ -27,6 +27,7 @@ export class GameRoundFormComponent implements OnInit, AfterViewInit, OnChanges 
   @Input() round: GameRound;
 
   @Output() scoreChanged = new EventEmitter();
+  @Output() scoreEntered = new EventEmitter();
 
   @ViewChildren('score') scoreInputs: any;
 
@@ -47,5 +48,11 @@ export class GameRoundFormComponent implements OnInit, AfterViewInit, OnChanges 
 
   onScoreChanged(): void {
     this.scoreChanged.emit();
+  }
+
+  onKeyup(event: { key: string; }) {
+    if (event.key === 'Enter') {
+      this.scoreEntered.emit();
+    }
   }
 }

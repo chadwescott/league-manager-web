@@ -2,7 +2,7 @@
     <div [@roundChanged]="round?.number">
         <div lmSectionHeader>Round {{round.number}}</div>
         <ng-container *ngFor="let teamScore of round.teamScores">
-            <div class="form-group">
+            <div class="form-group" (keyup)="onKeyup($event)">
                 <mat-form-field>
                     <mat-label>{{teamScore.team.name}}'s score</mat-label>
                     <input #score matInput type="text" lmNumericInput [(ngModel)]="teamScore.score"

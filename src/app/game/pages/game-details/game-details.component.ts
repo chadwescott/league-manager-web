@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { trigger, transition, useAnimation, query } from '@angular/animations';
+import { trigger, transition, useAnimation, query, style, animate, keyframes, group } from '@angular/animations';
 
 import { RouterService } from 'src/app/routing/services/router-service/router.service';
 import { GameService } from '../../game.service';
@@ -33,7 +33,7 @@ import { fadeOutAnimation } from 'src/app/core/animations/fade-out-animation';
           })
         ])
       ])
-    ])
+    ]),
   ]
 })
 export class GameDetailsComponent implements OnInit, OnDestroy {
