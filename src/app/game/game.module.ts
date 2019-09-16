@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreModule } from '../core/core.module';
 import { FormsModule } from '@angular/forms';
+import { GoogleChartsModule } from 'angular-google-charts';
 import { TeamModule } from '../team/team.module';
 
 // components
@@ -16,6 +17,8 @@ import { GameDetailsComponent } from './pages/game-details/game-details.componen
 import { GameRoundFormComponent } from './components/game-round-form/game-round-form.component';
 import { GameRoundListComponent } from './components/game-round-list/game-round-list.component';
 import { WildCardIndicatorComponent } from './components/wild-card-indicator/wild-card-indicator.component';
+import { ScoreByRoundChartComponent } from './components/score-by-round-chart/score-by-round-chart.component';
+import { MaterialModule } from '../core/material.module';
 
 @NgModule({
   declarations: [
@@ -26,12 +29,15 @@ import { WildCardIndicatorComponent } from './components/wild-card-indicator/wil
     GameScoreSummaryComponent,
     GameRoundFormComponent,
     GameRoundListComponent,
-    WildCardIndicatorComponent
+    WildCardIndicatorComponent,
+    ScoreByRoundChartComponent
   ],
   imports: [
     CommonModule,
     CoreModule,
     FormsModule,
+    MaterialModule,
+    GoogleChartsModule.forRoot(),
     TeamModule
   ]
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { trigger, transition, useAnimation, query, style, animate, keyframes, group } from '@angular/animations';
+import { trigger, transition, useAnimation, query } from '@angular/animations';
 
 import { RouterService } from 'src/app/routing/services/router-service/router.service';
 import { GameService } from '../../game.service';
@@ -12,6 +12,7 @@ import { Team } from 'src/app/core/models/teams';
 import { ScoreSystem } from 'src/app/core/enums/score-system';
 import { fadeInAnimation } from 'src/app/core/animations/fade-in-animation';
 import { fadeOutAnimation } from 'src/app/core/animations/fade-out-animation';
+import { ScoreByRoundChartComponent } from '../../components/score-by-round-chart/score-by-round-chart.component';
 
 @Component({
   selector: 'lm-game-details',
@@ -38,6 +39,7 @@ import { fadeOutAnimation } from 'src/app/core/animations/fade-out-animation';
 })
 export class GameDetailsComponent implements OnInit, OnDestroy {
   @ViewChild(GameRoundListComponent, { static: false }) gameRoundList: GameRoundListComponent;
+  @ViewChild(ScoreByRoundChartComponent, { static: false }) scoreByRoundChart: ScoreByRoundChartComponent;
 
   game: Game;
   teams: Team[];
@@ -95,11 +97,13 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       }
       this.updateWildCard();
       if (this.gameRoundList) { this.gameRoundList.updateRounds(); }
+      if (this.scoreByRoundChart) { this.scoreByRoundChart.initializeChartData(); }
     });
   }
 
   onScoreChanged() {
     this._gameService.updateGameScores(this.game);
+    if (this.scoreByRoundChart) { this.scoreByRoundChart.initializeChartData(); }
   }
 
   onEditRound(round: GameRound): void {

@@ -24,7 +24,7 @@ import { highlightAnimation } from 'src/app/core/animations/highlight-animation'
     trigger('wildCardChanged', [
       transition('* => *', [
         useAnimation(highlightAnimation, {
-          params: { timings: '800ms ease-in-out' }
+          params: { timings: '400ms linear' }
         })
       ])
     ])
@@ -32,9 +32,24 @@ import { highlightAnimation } from 'src/app/core/animations/highlight-animation'
 })
 export class WildCardIndicatorComponent implements OnInit {
   @Input() wildCard: string;
+  @Input() repeatCount = 2;
+
+  animateCount = 0;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onWildCardChangedStart() {
+
+  }
+
+  onWildCardChangedDone() {
+    if (++this.animateCount < this.repeatCount) {
+      this.wildCard = this.wildCard.endsWith(' ') ? this.wildCard.trim() : this.wildCard + ' ';
+    } else {
+      this.animateCount = 0;
+    }
   }
 }
