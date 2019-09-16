@@ -149,8 +149,4 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  private changeSelectedRound(index: number) {
-
-  }
-
 }

@@ -1,24 +1,33 @@
-@import '../../../../assets/scss/styles.scss';
+@import "../../../../assets/scss/styles.scss";
+
+.wild-card-container {
+  display: table;
+}
 
 .wild-card-label {
-    display: table-cell;
-    vertical-align: middle;
-    padding-right: 8px;
-    font-style: italic;
-    color: $primary-color;
-    font-size: x-large;
+  margin: 0 auto;
+  text-align: center;
+  font-style: italic;
+  color: $primary-color;
+  font-size: x-large;
 }
+
 .wild-card {
-    display: table-cell;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 600;
-    font-size: xx-large;
-    border: solid 1px $darker-accent-color;
-    border-radius: 3px;
-    background-color: white;
-    color: $accent-color;
+  margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: xx-large;
+  border: solid 0.02em $darker-accent-color;
+  border-radius: 0.2em;
+  background-color: white;
+  color: $accent-color;
+  width: 1.2em;
+  height: 1.4em;
+
+  div {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
     text-align: center;
-    vertical-align: middle;
-    width: 28px;
-    height: 38px;
+  }
 }

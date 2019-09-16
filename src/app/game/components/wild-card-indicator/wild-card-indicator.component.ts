@@ -9,7 +9,7 @@ import { highlightAnimation } from 'src/app/core/animations/highlight-animation'
   templateUrl: './wild-card-indicator.component.html',
   styleUrls: ['./wild-card-indicator.component.scss'],
   animations: [
-    trigger('wildCardChanged', [
+    trigger('wildCardExists', [
       transition(':enter', [
         useAnimation(fadeInAnimation, {
           params: { timings: '800ms ease-in-out' }
@@ -19,9 +19,9 @@ import { highlightAnimation } from 'src/app/core/animations/highlight-animation'
         useAnimation(fadeOutAnimation, {
           params: { timings: '800ms ease-in-out' }
         })
-      ]),
+      ])
     ]),
-    trigger('foo', [
+    trigger('wildCardChanged', [
       transition('* => *', [
         useAnimation(highlightAnimation, {
           params: { timings: '800ms ease-in-out' }

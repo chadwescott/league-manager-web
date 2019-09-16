@@ -21,6 +21,9 @@ $primary-color: mat-color($primary);
 $accent-color: mat-color($accent);
 $warn-color: mat-color($warn);
 
+$primary-contrast-color: mat-color($primary, default-contrast);
+$accent-contrast-color: mat-color($accent, default-contrast);
+
 $cv-orange: #f58025;
 $cv-blue: #005cab;
 $cv-green: #2d9a43;

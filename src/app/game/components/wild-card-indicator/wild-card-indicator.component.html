@@ -1,4 +1,8 @@
-<div [@wildCardChanged]="wildCard" *ngIf="wildCard">
-    <div class="wild-card-label">Wild</div>
-    <div [@foo]="wildCard" class="wild-card">{{wildCard}}</div>
+<div [@wildCardExists]="wildCard" *ngIf="wildCard">
+    <div class="wild-card-container">
+        <div [@wildCardChanged]="wildCard" class="wild-card">
+            <div>{{wildCard}}</div>
+        </div>
+        <div class="wild-card-label">Wild</div>
+    </div>
 </div>
