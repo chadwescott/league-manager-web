@@ -1,11 +1,10 @@
 import { animation, style, animate, keyframes, group } from '@angular/animations';
-import { Colors } from '../colors';
 
 export const highlightAnimation = animation([
     style('*'),
     group([
         animate('{{ timings }}', keyframes([
-            style({ background: Colors.highlightColor, offset: 0.5 }),
+            style({ background: '{{highlightColor}}', offset: 0.5 }),
             style({ background: '*', offset: 1.0 })
         ])),
         animate('{{ timings }}', keyframes([

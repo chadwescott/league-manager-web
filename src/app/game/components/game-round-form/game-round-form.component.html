@@ -1,6 +1,6 @@
 <div style="overflow-x: hidden;">
     <div [@roundChanged]="round?.number">
-        <div lmSectionHeader>Round {{round.number}}</div>
+        <div lmSectionHeader>{{roundLabel}} {{round.number}}</div>
         <ng-container *ngFor="let teamScore of round.teamScores">
             <div class="form-group" (keyup)="onKeyup($event)">
                 <mat-form-field>

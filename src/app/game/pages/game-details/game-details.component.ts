@@ -37,6 +37,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   @ViewChild(GameRoundListComponent, { static: false }) gameRoundList: GameRoundListComponent;
   @ViewChild(ScoreByRoundChartComponent, { static: false }) scoreByRoundChart: ScoreByRoundChartComponent;
 
+  roundLabel = 'Hand';
   game: Game;
   teams: Team[];
   rounds: Round[];

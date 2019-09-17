@@ -2,7 +2,7 @@
     <table mat-table [dataSource]="rounds" [@roundsChanged]="rounds?.length">
         <ng-container matColumnDef="round">
             <th mat-header-cell *matHeaderCellDef>
-                Round
+                {{roundLabel}}
                 <button mat-icon-button aria-label="Add Round" type="button" title="Add" (click)="onAddRound()">
                     <mat-icon>add</mat-icon>
                 </button>

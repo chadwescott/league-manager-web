@@ -24,6 +24,7 @@ import { fadeRightAnimation } from 'src/app/core/animations/fade-right-animation
   ]
 })
 export class GameRoundFormComponent implements OnInit, AfterViewInit, OnChanges {
+  @Input() roundLabel = 'Round';
   @Input() round: Round;
 
   @Output() scoreChanged = new EventEmitter();

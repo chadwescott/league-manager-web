@@ -30,6 +30,7 @@ import { fadeInAnimation } from 'src/app/core/animations/fade-in-animation';
 })
 export class GameRoundListComponent implements OnInit, AfterViewInit {
   @Input() game: Game;
+  @Input() roundLabel = 'Round';
   @Input() rounds: Round[] = [];
 
   @Output() addRound = new EventEmitter();

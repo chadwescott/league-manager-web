@@ -7,6 +7,7 @@ import { Round } from 'src/app/core/models/round';
   styleUrls: ['./score-by-round-chart.component.scss']
 })
 export class ScoreByRoundChartComponent implements OnInit {
+  @Input() roundLabel = 'Round';
   @Input() rounds: Round[];
 
   options = {
@@ -17,7 +18,7 @@ export class ScoreByRoundChartComponent implements OnInit {
       backgroundColor: '#ffffff'
     },
     hAxis: {
-      title: 'Round',
+      title: this.roundLabel,
       ticks: []
     },
     vAxis: {
@@ -32,6 +33,7 @@ export class ScoreByRoundChartComponent implements OnInit {
 
   ngOnInit() {
     this.initializeChart();
+    this.options.hAxis.title = this.roundLabel;
   }
 
   initializeChart() {
@@ -43,7 +45,7 @@ export class ScoreByRoundChartComponent implements OnInit {
     if (!this.rounds || this.rounds.length === 0) { return; }
     this.columnNames = this.rounds[0].teamScores.map(t => t.team.name);
     if (!this.columnNames || this.columnNames.length === 0) { return; }
-    this.columnNames.unshift('Round');
+    this.columnNames.unshift(this.roundLabel);
   }
 
   initializeChartData() {
