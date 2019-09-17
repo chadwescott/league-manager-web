@@ -36,4 +36,21 @@ export class PaginatorComponent implements OnInit {
   onLast() {
     this.last.emit();
   }
+
+  onKeyup(event) {
+    switch (event.key) {
+      case 'ArrowUp':
+        if (event.ctrlKey) { this.first.emit(); }
+        break;
+      case 'ArrowLeft':
+        if (event.ctrlKey) { this.previous.emit(); }
+        break;
+      case 'ArrowRight':
+        if (event.ctrlKey) { this.next.emit(); }
+        break;
+      case 'ArrowDown':
+        if (event.ctrlKey) { this.last.emit(); }
+        break;
+    }
+  }
 }

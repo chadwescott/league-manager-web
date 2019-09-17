@@ -38,7 +38,9 @@
                         </div>
                         <div lmPadded lmCardPanelContent>
                             <lm-game-round-form [round]="selectedRound" (scoreChanged)="onScoreChanged()"
-                                (scoreEntered)="onAddRound()">
+                                (scoreEntered)="onAddRound()" (loadFirstRound)="onFirstRound()"
+                                (loadNextRound)="onNextRound()" (loadPreviousRound)="onPreviousRound()"
+                                (loadLastRound)="onLastRound()">
                             </lm-game-round-form>
                             <lm-paginator *ngIf="selectedRound"
                                 [firstDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[0]"
