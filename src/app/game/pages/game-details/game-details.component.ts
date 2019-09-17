@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { trigger, transition, useAnimation, query } from '@angular/animations';
+import { trigger, transition, useAnimation } from '@angular/animations';
 
 import { RouterService } from 'src/app/routing/services/router-service/router.service';
 import { GameService } from '../../game.service';
@@ -21,32 +21,16 @@ import { ScoreByRoundChartComponent } from '../../components/score-by-round-char
   animations: [
     trigger('roundChanged', [
       transition(':enter', [
-        query('.card-panel-content', [
-          useAnimation(fadeInAnimation, {
-            params: { timings: '800ms ease-in-out' }
-          })
-        ])
+        useAnimation(fadeInAnimation, {
+          params: { timings: '800ms ease-in-out' }
+        })
       ]),
       transition(':leave', [
-        query('.card-panel-content', [
-          useAnimation(fadeOutAnimation, {
-            params: { timings: '800ms ease-in-out' }
-          })
-        ])
-      ]),
-      transition('* => *', [
-        query(':leave', [
-          useAnimation(fadeOutAnimation, {
-            params: { timings: '800ms ease-in-out' }
-          })
-        ], { optional: true }),
-        query(':enter', [
-          useAnimation(fadeInAnimation, {
-            params: { timings: '800ms ease-in-out' }
-          })
-        ], { optional: true })
+        useAnimation(fadeOutAnimation, {
+          params: { timings: '800ms ease-in-out' }
+        })
       ])
-    ]),
+    ])
   ]
 })
 export class GameDetailsComponent implements OnInit, OnDestroy {

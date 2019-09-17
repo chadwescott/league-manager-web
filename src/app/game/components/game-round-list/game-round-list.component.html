@@ -1,5 +1,5 @@
 <div #container class="scrollable">
-    <table mat-table [dataSource]="rounds">
+    <table mat-table [dataSource]="rounds" [@roundsChanged]="rounds?.length">
         <ng-container matColumnDef="round">
             <th mat-header-cell *matHeaderCellDef>
                 Round

@@ -3,11 +3,30 @@ import { Round } from 'src/app/core/models/round';
 import { MatTable } from '@angular/material';
 import { Game } from 'src/app/core/models/game';
 import { Team } from 'src/app/core/models/teams';
+import { trigger, transition, useAnimation, query } from '@angular/animations';
+import { fadeOutAnimation } from 'src/app/core/animations/fade-out-animation';
+import { fadeInAnimation } from 'src/app/core/animations/fade-in-animation';
 
 @Component({
   selector: 'lm-game-round-list',
   templateUrl: './game-round-list.component.html',
-  styleUrls: ['./game-round-list.component.scss']
+  styleUrls: ['./game-round-list.component.scss'],
+  animations: [
+    trigger('roundsChanged', [
+      transition('* => *', [
+        query(':enter', [
+          useAnimation(fadeInAnimation, {
+            params: { timings: '800ms ease-in-out' }
+          })
+        ], { optional: true }),
+        query(':leave', [
+          useAnimation(fadeOutAnimation, {
+            params: { timings: '800ms ease-in-out' }
+          })
+        ], { optional: true })
+      ])
+    ])
+  ]
 })
 export class GameRoundListComponent implements OnInit, AfterViewInit {
   @Input() game: Game;

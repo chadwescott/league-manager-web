@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { trigger, transition, useAnimation } from '@angular/animations';
-import { fadeInAnimation } from 'src/app/core/animations/fade-in-animation';
-import { fadeOutAnimation } from 'src/app/core/animations/fade-out-animation';
 import { highlightAnimation } from 'src/app/core/animations/highlight-animation';
 
 @Component({
@@ -9,22 +7,10 @@ import { highlightAnimation } from 'src/app/core/animations/highlight-animation'
   templateUrl: './wild-card-indicator.component.html',
   styleUrls: ['./wild-card-indicator.component.scss'],
   animations: [
-    trigger('wildCardExists', [
-      transition(':enter', [
-        useAnimation(fadeInAnimation, {
-          params: { timings: '800ms ease-in-out' }
-        })
-      ]),
-      transition(':leave', [
-        useAnimation(fadeOutAnimation, {
-          params: { timings: '800ms ease-in-out' }
-        })
-      ])
-    ]),
     trigger('wildCardChanged', [
       transition('* => *', [
         useAnimation(highlightAnimation, {
-          params: { timings: '400ms linear' }
+          params: { timings: '500ms linear' }
         })
       ])
     ])
@@ -32,24 +18,9 @@ import { highlightAnimation } from 'src/app/core/animations/highlight-animation'
 })
 export class WildCardIndicatorComponent implements OnInit {
   @Input() wildCard: string;
-  @Input() repeatCount = 2;
-
-  animateCount = 0;
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  onWildCardChangedStart() {
-
-  }
-
-  onWildCardChangedDone() {
-    if (++this.animateCount < this.repeatCount) {
-      this.wildCard = this.wildCard.endsWith(' ') ? this.wildCard.trim() : this.wildCard + ' ';
-    } else {
-      this.animateCount = 0;
-    }
   }
 }
