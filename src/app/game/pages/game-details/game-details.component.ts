@@ -33,6 +33,18 @@ import { ScoreByRoundChartComponent } from '../../components/score-by-round-char
             params: { timings: '800ms ease-in-out' }
           })
         ])
+      ]),
+      transition('* => *', [
+        query(':leave', [
+          useAnimation(fadeOutAnimation, {
+            params: { timings: '800ms ease-in-out' }
+          })
+        ], { optional: true }),
+        query(':enter', [
+          useAnimation(fadeInAnimation, {
+            params: { timings: '800ms ease-in-out' }
+          })
+        ], { optional: true })
       ])
     ]),
   ]
@@ -85,6 +97,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     this._gameService.createRound(this.game).subscribe(x => {
       this.selectedRound = x;
       this.updateRounds();
+      this.gameRoundList.scrollToBottom();
     });
   }
 

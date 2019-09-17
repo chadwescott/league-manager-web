@@ -13,43 +13,43 @@
             </div>
         </div>
         <div lmCardPanelBody>
-            <div fxLayout="row wrap" fxLayoutGap="10px" [@roundChanged]="selectedRound?.number">
-                <div fxFlex fxLayout="column" fxLayoutGap="10px">
-                    <div lmCardPanelContent fxFlex *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.AdHoc">
+            <div fxLayout="row wrap" fxLayoutGap="0.6em">
+                <div fxFlex fxLayout="column" fxLayoutGap="0.6em"
+                    *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.AdHoc">
+                    <div lmCardPanelContent fxFlex>
                         <lm-game-score-summary [game]="game" [teamScores]="game.teamScores"></lm-game-score-summary>
                     </div>
-                    <ng-container *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.Rounds">
-                        <div lmCardPanelContent fxFlex>
+                </div>
+                <ng-container *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.Rounds">
+                    <div fxFlex fxLayout="column" fxLayoutGap="0.6em" [@roundChanged]="selectedRound?.number">
+                        <div fxFlex lmCardPanelContent>
                             <lm-game-round-list [game]="game" [rounds]="rounds" (addRound)="onAddRound()"
                                 (editRound)="onEditRound($event)" (deleteRound)="onDeleteRound($event)">
                             </lm-game-round-list>
                         </div>
-                        <div lmCardPanelContent fxFlex>
+                        <div fxFlex lmCardPanelContent *ngIf="selectedRound">
                             <lm-score-by-round-chart [rounds]="rounds"></lm-score-by-round-chart>
                         </div>
-                    </ng-container>
-                </div>
-                <div fxFlex [@roundChanged]="selectedRound?.number" *ngIf="selectedRound">
-                    <div fxFlex fxLayout="column" fxLayoutGap="10px">
-                        <div lmPadded lmCardPanelContent>
+                    </div>
+                    <div fxFlex fxLayout="column" fxLayoutGap="0.6em" [@roundChanged]="selectedRound?.number"
+                        *ngIf="selectedRound">
+                        <div lmPadded lmCardPanelContent *ngIf="selectedRound">
                             <lm-wild-card-indicator class="section" [wildCard]="wildCard"></lm-wild-card-indicator>
                         </div>
                         <div lmPadded lmCardPanelContent>
-                            <div fxFlex>
-                                <lm-game-round-form class="section" [round]="selectedRound"
-                                    (scoreChanged)="onScoreChanged()" (scoreEntered)="onAddRound()">
-                                </lm-game-round-form>
-                                <lm-paginator *ngIf="selectedRound"
-                                    [firstDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[0]"
-                                    [previousDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[0]"
-                                    [nextDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[rounds.length - 1]"
-                                    [lastDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[rounds.length - 1]"
-                                    (first)="onFirstRound()" (previous)="onPreviousRound()" (next)="onNextRound()"
-                                    (last)="onLastRound()"></lm-paginator>
-                            </div>
+                            <lm-game-round-form class="section" [round]="selectedRound"
+                                (scoreChanged)="onScoreChanged()" (scoreEntered)="onAddRound()">
+                            </lm-game-round-form>
+                            <lm-paginator *ngIf="selectedRound"
+                                [firstDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[0]"
+                                [previousDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[0]"
+                                [nextDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[rounds.length - 1]"
+                                [lastDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[rounds.length - 1]"
+                                (first)="onFirstRound()" (previous)="onPreviousRound()" (next)="onNextRound()"
+                                (last)="onLastRound()"></lm-paginator>
                         </div>
                     </div>
-                </div>
+                </ng-container>
             </div>
         </div>
     </div>

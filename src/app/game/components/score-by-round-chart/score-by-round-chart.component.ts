@@ -11,10 +11,17 @@ export class ScoreByRoundChartComponent implements OnInit {
 
   options = {
     backgroundColor: {
-      fill: 'rgba(255 0 0 255)'
+      fill: '#fff9c4'
+    },
+    chartArea: {
+      backgroundColor: '#ffffff'
     },
     hAxis: {
-      title: 'Round'
+      title: 'Round',
+      ticks: []
+    },
+    vAxis: {
+      title: 'Score'
     }
   };
 
@@ -52,5 +59,7 @@ export class ScoreByRoundChartComponent implements OnInit {
       data.unshift(this.rounds[i].number);
       this.chartData.push(data);
     }
+    this.options.hAxis.ticks = this.rounds.map(x => x.number);
+    this.options.hAxis.ticks.unshift('');
   }
 }
