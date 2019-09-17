@@ -1,6 +1,6 @@
 import { TeamRoundScore } from './team-round-score';
 
-export class GameRound {
+export class Round {
     constructor(
         public id: string,
         public gameId: string,

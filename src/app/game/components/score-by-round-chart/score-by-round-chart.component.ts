@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GameRound } from 'src/app/core/models/game-round';
+import { Round } from 'src/app/core/models/round';
 
 @Component({
   selector: 'lm-score-by-round-chart',
@@ -7,7 +7,7 @@ import { GameRound } from 'src/app/core/models/game-round';
   styleUrls: ['./score-by-round-chart.component.scss']
 })
 export class ScoreByRoundChartComponent implements OnInit {
-  @Input() rounds: GameRound[];
+  @Input() rounds: Round[];
 
   options = {
     backgroundColor: {

@@ -6,7 +6,7 @@ import { trigger, transition, useAnimation, query } from '@angular/animations';
 import { RouterService } from 'src/app/routing/services/router-service/router.service';
 import { GameService } from '../../game.service';
 import { Game } from 'src/app/core/models/game';
-import { GameRound } from 'src/app/core/models/game-round';
+import { Round } from 'src/app/core/models/round';
 import { GameRoundListComponent } from '../../components/game-round-list/game-round-list.component';
 import { Team } from 'src/app/core/models/teams';
 import { ScoreSystem } from 'src/app/core/enums/score-system';
@@ -55,9 +55,9 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
 
   game: Game;
   teams: Team[];
-  rounds: GameRound[];
+  rounds: Round[];
   wildCard: string;
-  selectedRound: GameRound;
+  selectedRound: Round;
 
   ScoreSystem = ScoreSystem;
 
@@ -119,11 +119,11 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     if (this.scoreByRoundChart) { this.scoreByRoundChart.initializeChartData(); }
   }
 
-  onEditRound(round: GameRound): void {
+  onEditRound(round: Round): void {
     this.selectedRound = round;
   }
 
-  onDeleteRound(round: GameRound): void {
+  onDeleteRound(round: Round): void {
     if (this.selectedRound === round) { this.selectedRound = null; }
     this._gameService.deleteRound(round).subscribe(() => this.updateRounds());
   }

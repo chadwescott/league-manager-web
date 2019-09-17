@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, AfterViewInit, ElementRef } from '@angular/core';
-import { GameRound } from 'src/app/core/models/game-round';
+import { Round } from 'src/app/core/models/round';
 import { MatTable } from '@angular/material';
 import { Game } from 'src/app/core/models/game';
 import { Team } from 'src/app/core/models/teams';
@@ -11,13 +11,13 @@ import { Team } from 'src/app/core/models/teams';
 })
 export class GameRoundListComponent implements OnInit, AfterViewInit {
   @Input() game: Game;
-  @Input() rounds: GameRound[] = [];
+  @Input() rounds: Round[] = [];
 
   @Output() addRound = new EventEmitter();
-  @Output() editRound = new EventEmitter<GameRound>();
-  @Output() deleteRound = new EventEmitter<GameRound>();
+  @Output() editRound = new EventEmitter<Round>();
+  @Output() deleteRound = new EventEmitter<Round>();
 
-  @ViewChild(MatTable, { static: true }) table: MatTable<GameRound[]>;
+  @ViewChild(MatTable, { static: true }) table: MatTable<Round[]>;
   @ViewChild('container', { static: true }) private container: ElementRef;
 
   teams: Team[];
@@ -49,11 +49,11 @@ export class GameRoundListComponent implements OnInit, AfterViewInit {
     this.scrollToBottom();
   }
 
-  onEditRound(round: GameRound) {
+  onEditRound(round: Round) {
     this.editRound.emit(round);
   }
 
-  onDeleteRound(round: GameRound) {
+  onDeleteRound(round: Round) {
     this.deleteRound.emit(round);
   }
 }

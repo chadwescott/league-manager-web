@@ -1,7 +1,7 @@
 import { Team } from './teams';
 import { GameResult } from '../enums/game-result';
 
-export class GameTeamScore {
+export class TeamScore {
     constructor(
         public id: string,
         public gameId: string,

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChildren, AfterViewInit } from '@angular/core';
 import { trigger, transition, useAnimation } from '@angular/animations';
-import { GameRound } from 'src/app/core/models/game-round';
+import { Round } from 'src/app/core/models/round';
 import { fadeLeftAnimation } from 'src/app/core/animations/fade-left-animation';
 import { fadeRightAnimation } from 'src/app/core/animations/fade-right-animation';
 
@@ -24,7 +24,7 @@ import { fadeRightAnimation } from 'src/app/core/animations/fade-right-animation
   ]
 })
 export class GameRoundFormComponent implements OnInit, AfterViewInit, OnChanges {
-  @Input() round: GameRound;
+  @Input() round: Round;
 
   @Output() scoreChanged = new EventEmitter();
   @Output() scoreEntered = new EventEmitter();

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Game } from '../core/models/game';
-import { GameRound } from '../core/models/game-round';
+import { Round } from '../core/models/round';
 import { TeamRoundScore } from '../core/models/team-round-score';
 import { Team } from '../core/models/teams';
-import { GameTeamScore } from '../core/models/game-team-score';
+import { TeamScore } from '../core/models/team-score';
 import { GameSettings } from '../core/models/game-settings';
 import { ScoreSystem } from '../core/enums/score-system';
 import { WinCondition } from '../core/enums/win-condition';
@@ -16,7 +16,7 @@ export class GameService {
   private _team1 = new Team('1', 'Chad', 1);
   private _team2 = new Team('2', 'Nancy', 2);
   private _games: Game[] = [];
-  private _gameRounds: { [gameId: string]: GameRound[]; } = {};
+  private _gameRounds: { [gameId: string]: Round[]; } = {};
   private _gameNumber = 0;
   private _separator = '_';
   private _gameSettings: GameSettings = new GameSettings(2, 5, ScoreSystem.Rounds, WinCondition.ScoreLimit);
@@ -24,8 +24,8 @@ export class GameService {
   constructor() {
     const game = new Game('1', 1,
       [
-        new GameTeamScore('1', '1', this._team1),
-        new GameTeamScore('2', '2', this._team2)
+        new TeamScore('1', '1', this._team1),
+        new TeamScore('2', '2', this._team2)
       ],
       new Date(Date.now()),
       this._gameSettings);
@@ -61,12 +61,12 @@ export class GameService {
     return of(game);
   }
 
-  public getGameRounds(id: string): Observable<GameRound[]> {
+  public getGameRounds(id: string): Observable<Round[]> {
     return of(this._gameRounds[id]);
   }
 
-  public getGameRoundById(gameId: string, id: string): Observable<GameRound> {
-    let gameRound: GameRound = null;
+  public getGameRoundById(gameId: string, id: string): Observable<Round> {
+    let gameRound: Round = null;
     const getGameRounds$ = this.getGameRounds(gameId).subscribe(gameRounds => {
       if (gameRounds == null) { return; }
       gameRound = gameRounds.find(x => x.id === id);
@@ -75,14 +75,14 @@ export class GameService {
     return of(gameRound);
   }
 
-  public createRound(game: Game): Observable<GameRound> {
+  public createRound(game: Game): Observable<Round> {
     if (this._gameRounds[game.id] == null) {
       this._gameRounds[game.id] = [];
     }
 
     const roundNumber = this._gameRounds[game.id].length + 1;
     const id = `${game.id}${this._separator}${roundNumber}`;
-    const gameRound = new GameRound(id, game.id, roundNumber);
+    const gameRound = new Round(id, game.id, roundNumber);
     gameRound.teamScores = game.teamScores.map((teamScore, index) =>
       new TeamRoundScore(`${id}${this._separator}${index}`, teamScore.team, 0));
 
@@ -93,7 +93,7 @@ export class GameService {
 
   public updateGameScores(game: Game): void {
     const rounds = this._gameRounds[game.id];
-    const teamScores = game.teamScores.map(x => new GameTeamScore('', game.id, x.team));
+    const teamScores = game.teamScores.map(x => new TeamScore('', game.id, x.team));
 
     for (let i = 0; i < rounds.length; i++) {
       for (let j = 0; j < rounds[i].teamScores.length; j++) {
@@ -104,7 +104,7 @@ export class GameService {
     game.teamScores = teamScores;
   }
 
-  public deleteRound(gameRound: GameRound): Observable<boolean> {
+  public deleteRound(gameRound: Round): Observable<boolean> {
     const gameId = gameRound.gameId;
     const getGame$ = this.getGameById(gameId).subscribe(game => {
       if (game == null) { return; }
@@ -123,7 +123,7 @@ export class GameService {
     return of(true);
   }
 
-  public editRound(gameRound: GameRound): Observable<GameRound> {
+  public editRound(gameRound: Round): Observable<Round> {
     const gameId = gameRound.gameId;
     const getGame$ = this.getGameById(gameId).subscribe(game => {
       if (game == null) { return; }
@@ -140,7 +140,7 @@ export class GameService {
     return of(gameRound);
   }
 
-  private updateRoundNumbers(rounds: GameRound[]): void {
+  private updateRoundNumbers(rounds: Round[]): void {
     for (let i = 0; i < rounds.length; i++) {
       rounds[i].number = i + 1;
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Game } from 'src/app/core/models/game';
-import { GameTeamScore } from 'src/app/core/models/game-team-score';
+import { TeamScore } from 'src/app/core/models/team-score';
 
 @Component({
   selector: 'lm-game-score-summary',
@@ -9,7 +9,7 @@ import { GameTeamScore } from 'src/app/core/models/game-team-score';
 })
 export class GameScoreSummaryComponent implements OnInit {
   @Input() game: Game;
-  @Input() teamScores: GameTeamScore[];
+  @Input() teamScores: TeamScore[];
 
   displayedColumns: string[] = ['team', 'score'];
 

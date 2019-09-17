@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Game } from 'src/app/core/models/game';
 import { Team } from 'src/app/core/models/teams';
-import { GameTeamScore } from 'src/app/core/models/game-team-score';
+import { TeamScore } from 'src/app/core/models/team-score';
 import { GameSettings } from 'src/app/core/models/game-settings';
 
 @Component({
@@ -58,7 +58,7 @@ export class GameFormComponent implements OnInit {
       }
     }
 
-    const teamScores = this.teamEntrants.map(x => new GameTeamScore('', '', x));
+    const teamScores = this.teamEntrants.map(x => new TeamScore('', '', x));
 
     const game = new Game('', 0, teamScores, new Date(Date.now()), this.gameSettings);
     this.gameSaved.emit(game);
