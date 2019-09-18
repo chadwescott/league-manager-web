@@ -13,15 +13,15 @@
             </div>
         </div>
         <div lmCardPanelBody>
-            <div fxLayout="row wrap" fxLayoutGap="0.6em">
-                <div fxFlex fxLayout="column" fxLayoutGap="0.6em"
+            <div fxLayout="row wrap" fxLayoutGap="0.4em">
+                <div fxFlex fxLayout="column" fxLayoutGap="0.4em"
                     *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.AdHoc">
                     <div lmCardPanelContent fxFlex>
                         <lm-game-score-summary [game]="game" [teamScores]="game.teamScores"></lm-game-score-summary>
                     </div>
                 </div>
                 <ng-container *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.Rounds">
-                    <div fxFlex fxLayout="column" fxLayoutGap="0.6em">
+                    <div fxFlex fxLayout="column" fxLayoutGap="0.4em">
                         <div [@roundChanged]="selectedRound?.number" fxFlex lmCardPanelContent>
                             <lm-game-round-list [game]="game" [roundLabel]="roundLabel" [rounds]="rounds"
                                 (addRound)="onAddRound()" (editRound)="onEditRound($event)"
@@ -33,7 +33,7 @@
                             </lm-score-by-round-chart>
                         </div>
                     </div>
-                    <div *ngIf="selectedRound" fxFlex fxLayout="column" fxLayoutGap="0.6em"
+                    <div *ngIf="selectedRound" fxFlex fxLayout="column" fxLayoutGap="0.4em"
                         [@roundChanged]="selectedRound?.number">
                         <div lmPadded lmCardPanelContent>
                             <lm-wild-card-indicator [wildCard]="wildCard"></lm-wild-card-indicator>
