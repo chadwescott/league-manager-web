@@ -4,8 +4,9 @@ import { MatTable } from '@angular/material';
 import { Game } from 'src/app/core/models/game';
 import { Team } from 'src/app/core/models/teams';
 import { trigger, transition, useAnimation, query } from '@angular/animations';
-import { fadeOutAnimation } from 'src/app/core/animations/fade-out-animation';
-import { fadeInAnimation } from 'src/app/core/animations/fade-in-animation';
+import { FADE_OUT_ANIMATION } from 'src/app/core/animations/fade-out-animation';
+import { FADE_IN_ANIMATION } from 'src/app/core/animations/fade-in-animation';
+import { TIMINGS } from 'src/app/core/animations/timings';
 
 @Component({
   selector: 'lm-game-round-list',
@@ -15,13 +16,13 @@ import { fadeInAnimation } from 'src/app/core/animations/fade-in-animation';
     trigger('roundsChanged', [
       transition('* => *', [
         query(':enter', [
-          useAnimation(fadeInAnimation, {
-            params: { timings: '800ms ease-in-out' }
+          useAnimation(FADE_IN_ANIMATION, {
+            params: { timings: TIMINGS.FADE_IN_OUT_TIMING }
           })
         ], { optional: true }),
         query(':leave', [
-          useAnimation(fadeOutAnimation, {
-            params: { timings: '800ms ease-in-out' }
+          useAnimation(FADE_OUT_ANIMATION, {
+            params: { timings: TIMINGS.FADE_IN_OUT_TIMING }
           })
         ], { optional: true })
       ])

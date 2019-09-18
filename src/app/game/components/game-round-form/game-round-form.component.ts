@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChildren, AfterViewInit } from '@angular/core';
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { Round } from 'src/app/core/models/round';
-import { fadeLeftAnimation } from 'src/app/core/animations/fade-left-animation';
-import { fadeRightAnimation } from 'src/app/core/animations/fade-right-animation';
+import { FADE_LEFT_ANIMATION } from 'src/app/core/animations/fade-left-animation';
+import { FADE_RIGHT_ANIMATION } from 'src/app/core/animations/fade-right-animation';
+import { TIMINGS } from 'src/app/core/animations/timings';
 
 @Component({
   selector: 'lm-game-round-form',
@@ -11,13 +12,13 @@ import { fadeRightAnimation } from 'src/app/core/animations/fade-right-animation
   animations: [
     trigger('roundChanged', [
       transition(':increment', [
-        useAnimation(fadeRightAnimation, {
-          params: { timings: '800ms ease-in-out' }
+        useAnimation(FADE_RIGHT_ANIMATION, {
+          params: { timings: TIMINGS.FADE_IN_OUT_TIMING }
         })
       ]),
       transition(':decrement', [
-        useAnimation(fadeLeftAnimation, {
-          params: { timings: '800ms ease-in-out' }
+        useAnimation(FADE_LEFT_ANIMATION, {
+          params: { timings: TIMINGS.FADE_IN_OUT_TIMING }
         })
       ])
     ])

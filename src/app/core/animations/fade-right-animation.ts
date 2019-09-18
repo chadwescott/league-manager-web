@@ -1,7 +1,7 @@
 import { animation, style, animate, keyframes } from '@angular/animations';
 
 // this animation scrolls the content out of view to the right and then comes back in from the left
-export const fadeRightAnimation = animation([
+export const FADE_RIGHT_ANIMATION = animation([
     style({ transform: 'translateX(0)' }),
     animate('{{ timings }}', keyframes([
         style({ transform: 'translateX(100%)', offset: 0.50 }),

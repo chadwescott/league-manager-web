@@ -10,9 +10,10 @@ import { Round } from 'src/app/core/models/round';
 import { GameRoundListComponent } from '../../components/game-round-list/game-round-list.component';
 import { Team } from 'src/app/core/models/teams';
 import { ScoreSystem } from 'src/app/core/enums/score-system';
-import { fadeInAnimation } from 'src/app/core/animations/fade-in-animation';
-import { fadeOutAnimation } from 'src/app/core/animations/fade-out-animation';
+import { FADE_IN_ANIMATION } from 'src/app/core/animations/fade-in-animation';
+import { FADE_OUT_ANIMATION } from 'src/app/core/animations/fade-out-animation';
 import { ScoreByRoundChartComponent } from '../../components/score-by-round-chart/score-by-round-chart.component';
+import { TIMINGS } from 'src/app/core/animations/timings';
 
 @Component({
   selector: 'lm-game-details',
@@ -21,13 +22,13 @@ import { ScoreByRoundChartComponent } from '../../components/score-by-round-char
   animations: [
     trigger('roundChanged', [
       transition(':enter', [
-        useAnimation(fadeInAnimation, {
-          params: { timings: '800ms ease-in-out' }
+        useAnimation(FADE_IN_ANIMATION, {
+          params: { timings: TIMINGS.FADE_IN_OUT_TIMING }
         })
       ]),
       transition(':leave', [
-        useAnimation(fadeOutAnimation, {
-          params: { timings: '800ms ease-in-out' }
+        useAnimation(FADE_OUT_ANIMATION, {
+          params: { timings: TIMINGS.FADE_IN_OUT_TIMING }
         })
       ])
     ])

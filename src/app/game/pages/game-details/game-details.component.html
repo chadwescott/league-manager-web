@@ -44,8 +44,7 @@
                                 (loadFirstRound)="onFirstRound()" (loadNextRound)="onNextRound()"
                                 (loadPreviousRound)="onPreviousRound()" (loadLastRound)="onLastRound()">
                             </lm-game-round-form>
-                            <lm-paginator *ngIf="selectedRound"
-                                [firstDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[0]"
+                            <lm-paginator [firstDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[0]"
                                 [previousDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[0]"
                                 [nextDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[rounds.length - 1]"
                                 [lastDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[rounds.length - 1]"

@@ -1,6 +1,6 @@
 import { animation, style, animate, keyframes, group } from '@angular/animations';
 
-export const highlightAnimation = animation([
+export const HIGHLIGHT_ANIMATION = animation([
     style('*'),
     group([
         animate('{{ timings }}', keyframes([
