@@ -13,8 +13,10 @@
         <ng-container *ngFor="let team of teams; let i = index">
             <ng-container [matColumnDef]="team.id">
                 <th mat-header-cell *matHeaderCellDef>{{team.name}}</th>
-                <td mat-cell *matCellDef="let round">{{round.teamScores[i].score}}</td>
-                <td mat-footer-cell *matFooterCellDef>{{game.teamScores[i].score}}</td>
+                <td mat-cell *matCellDef="let round" [class.negative]="round.teamScores[i].score < 0">{{round.teamScores[i].score}}</td>
+                <td mat-footer-cell *matFooterCellDef [class.negative]="game.teamScores[i].score < 0">
+                    <span [@scoreChanged]="game.teamScores[i].score">{{game.teamScores[i].score}}</span>
+                </td>
             </ng-container>
         </ng-container>
         <ng-container matColumnDef="actions">
@@ -23,7 +25,7 @@
                 <button mat-icon-button aria-label="Edit Round" type="button" title="Edit" (click)="onEditRound(round)">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button  mat-icon-button aria-label="Delete Round" type="button" title="Delete"
+                <button mat-icon-button aria-label="Delete Round" type="button" title="Delete"
                     (click)="onDeleteRound(round)">
                     <mat-icon>delete_forever</mat-icon>
                 </button>

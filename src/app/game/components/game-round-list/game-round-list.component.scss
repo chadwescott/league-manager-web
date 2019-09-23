@@ -1,16 +1,17 @@
 @import "../../../../assets//scss/styles.scss";
 
 th.mat-header-cell > button.mat-icon-button .mat-icon {
-  margin-top: -2px;
+  margin-top: -0.2em;
 }
 
 tr.mat-footer-row {
   font-weight: bold;
+  font-size: larger;
 }
 
 td.mat-cell:last-of-type,
 td.mat-footer-cell:last-of-type,
 th.mat-header-cell:last-of-type {
-  width: 60px;
-  padding-right: 0px;
+  width: 5em;
+  padding-right: 0;
 }

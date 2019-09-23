@@ -1,0 +1,1 @@
+Use directives that set classes on elements to also include logic to choose different classes based on some criteria injected in to support switching themes. It would be possible to swap out different colors and styles.

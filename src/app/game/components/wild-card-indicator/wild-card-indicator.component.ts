@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { trigger, transition, useAnimation } from '@angular/animations';
-import { HIGHLIGHT_ANIMATION } from 'src/app/core/animations/highlight-animation';
-import { COLORS } from 'src/app/core/colors';
-import { TIMINGS } from 'src/app/core/animations/timings';
+import { COLORS } from 'src/app/core/constants/colors';
+import { HIGHLIGHT_TIMING } from 'src/app/core/constants/timings';
+import { HIGHLIGHT_ANIMATION } from 'src/app/core/constants/animations';
 
 @Component({
   selector: 'lm-wild-card-indicator',
@@ -12,7 +12,7 @@ import { TIMINGS } from 'src/app/core/animations/timings';
     trigger('wildCardChanged', [
       transition('* => *', [
         useAnimation(HIGHLIGHT_ANIMATION, {
-          params: { timings: TIMINGS.HIGHLIGHT_TIMING, highlightColor: COLORS.HIGHLIGHT_COLOR }
+          params: { timings: HIGHLIGHT_TIMING, highlightColor: COLORS.HIGHLIGHT_COLOR }
         })
       ])
     ])

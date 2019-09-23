@@ -3,10 +3,10 @@ import { Round } from 'src/app/core/models/round';
 import { MatTable } from '@angular/material';
 import { Game } from 'src/app/core/models/game';
 import { Team } from 'src/app/core/models/teams';
-import { trigger, transition, useAnimation, query } from '@angular/animations';
-import { FADE_OUT_ANIMATION } from 'src/app/core/animations/fade-out-animation';
-import { FADE_IN_ANIMATION } from 'src/app/core/animations/fade-in-animation';
-import { TIMINGS } from 'src/app/core/animations/timings';
+import { trigger, transition, useAnimation, query, animate, style } from '@angular/animations';
+import { SCALE_IN_VERTICAL_ANIMATION, SCALE_OUT_VERTICAL_ANIMATION } from 'src/app/core/constants/animations';
+import { SCALE_IN_OUT_TIMING, FADE_IN_OUT_TIMING } from 'src/app/core/constants/timings';
+import { COLORS } from 'src/app/core/constants/colors';
 
 @Component({
   selector: 'lm-game-round-list',
@@ -16,15 +16,23 @@ import { TIMINGS } from 'src/app/core/animations/timings';
     trigger('roundsChanged', [
       transition('* => *', [
         query(':enter', [
-          useAnimation(FADE_IN_ANIMATION, {
-            params: { timings: TIMINGS.FADE_IN_OUT_TIMING }
+          useAnimation(SCALE_IN_VERTICAL_ANIMATION, {
+            params: { timings: SCALE_IN_OUT_TIMING }
           })
         ], { optional: true }),
         query(':leave', [
-          useAnimation(FADE_OUT_ANIMATION, {
-            params: { timings: TIMINGS.FADE_IN_OUT_TIMING }
+          useAnimation(SCALE_OUT_VERTICAL_ANIMATION, {
+            params: { timings: SCALE_IN_OUT_TIMING }
           })
         ], { optional: true })
+      ])
+    ]),
+    trigger('scoreChanged', [
+      transition(':increment', [
+        animate(SCALE_IN_OUT_TIMING, style({ background: 'yellow', color: 'black' }))
+      ]),
+      transition(':decrement', [
+        animate(SCALE_IN_OUT_TIMING, style({ background: 'yellow', color: 'red' }))
       ])
     ])
   ]
