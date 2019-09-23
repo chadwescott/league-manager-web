@@ -40,7 +40,6 @@ body {
 }
 
 .scrollable {
-  // min-height: 0;
   max-height: 26em;
   overflow: auto;
 }
@@ -93,7 +92,6 @@ body {
 .card-panel-body .card-panel-content {
   border: inset 0.25em $primary-color;
   background-color: $content-color;
-  // box-shadow: inset 0 0 0.6em $darker-primary-color; 
 }
 
 .mat-header-cell .mat-icon-button {
@@ -129,6 +127,10 @@ div .section {
   font-size: large;
   font-weight: 600;
   padding-bottom: 0.2em;
+}
+
+td.header {
+  font-weight: 600;
 }
 
 tr.mat-header-row,

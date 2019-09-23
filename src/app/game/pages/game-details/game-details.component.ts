@@ -30,6 +30,18 @@ import { FADE_IN_OUT_TIMING } from 'src/app/core/constants/timings';
           params: { timings: FADE_IN_OUT_TIMING }
         })
       ])
+    ]),
+    trigger('gameChanged', [
+      transition(':enter', [
+        useAnimation(FADE_IN_ANIMATION, {
+          params: { timings: FADE_IN_OUT_TIMING }
+        })
+      ]),
+      transition(':leave', [
+        useAnimation(FADE_OUT_ANIMATION, {
+          params: { timings: FADE_IN_OUT_TIMING }
+        })
+      ])
     ])
   ]
 })

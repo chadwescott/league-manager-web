@@ -93,7 +93,7 @@ export class GameService {
 
   public updateGameScores(game: Game): void {
     const rounds = this._gameRounds[game.id];
-    const teamScores = game.teamScores.map(x => new TeamScore('', game.id, x.team));
+    const teamScores = game.teamScores.map(x => new TeamScore(x.id, game.id, x.team));
 
     for (let i = 0; i < rounds.length; i++) {
       for (let j = 0; j < rounds[i].teamScores.length; j++) {
@@ -101,7 +101,9 @@ export class GameService {
       }
     }
 
-    game.teamScores = teamScores;
+    for (let i = 0; i < teamScores.length; i++) {
+      game.teamScores[i].score = teamScores[i].score;
+    }
   }
 
   public deleteRound(gameRound: Round): Observable<boolean> {
