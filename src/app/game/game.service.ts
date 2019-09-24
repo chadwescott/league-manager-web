@@ -8,6 +8,7 @@ import { TeamScore } from '../core/models/team-score';
 import { GameSettings } from '../core/models/game-settings';
 import { ScoreSystem } from '../core/enums/score-system';
 import { WinCondition } from '../core/enums/win-condition';
+import { TeamScoreEvent } from '../core/models/team-score-event';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,11 @@ export class GameService {
   private _team2 = new Team('2', 'Nancy', 2);
   private _games: Game[] = [];
   private _gameRounds: { [gameId: string]: Round[]; } = {};
+  private _gameScores: { [gameId: string]: TeamScoreEvent[]; } = {};
   private _gameNumber = 0;
   private _separator = '_';
-  private _gameSettings: GameSettings = new GameSettings(2, 5, ScoreSystem.Rounds, WinCondition.ScoreLimit);
+  // private _gameSettings: GameSettings = new GameSettings(2, 5, ScoreSystem.Rounds, WinCondition.ScoreLimit);
+  private _gameSettings: GameSettings = new GameSettings(2, 5, ScoreSystem.AdHoc, WinCondition.ScoreLimit);
 
   constructor() {
     const game = new Game('1', 1,
@@ -92,6 +95,12 @@ export class GameService {
   }
 
   public updateGameScores(game: Game): void {
+    if (game.gameSettings.scoreSystem === ScoreSystem.Rounds) {
+      this.updateGameScoresByRound(game);
+    }
+  }
+
+  private updateGameScoresByRound(game: Game) {
     const rounds = this._gameRounds[game.id];
     const teamScores = game.teamScores.map(x => new TeamScore(x.id, game.id, x.team));
 
@@ -99,6 +108,20 @@ export class GameService {
       for (let j = 0; j < rounds[i].teamScores.length; j++) {
         teamScores[j].score += Number(rounds[i].teamScores[j].score);
       }
+    }
+
+    for (let i = 0; i < teamScores.length; i++) {
+      game.teamScores[i].score = teamScores[i].score;
+    }
+  }
+
+  private updateGameScoresAdHoc(game: Game) {
+    const scores = this._gameScores[game.id];
+    const teamScores = game.teamScores.map(x => new TeamScore(x.id, game.id, x.team));
+
+    for (let i = 0; i < scores.length; i++) {
+      const teamScore = teamScores.find(x => x.team === scores[i].team);
+      teamScore.score += scores[i].score;
     }
 
     for (let i = 0; i < teamScores.length; i++) {

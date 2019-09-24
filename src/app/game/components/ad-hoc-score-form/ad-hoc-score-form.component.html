@@ -1,0 +1,18 @@
+<div style="overflow-x: hidden;">
+    <div lmSectionHeader>Record Scores</div>
+    <div class="form-group">
+        <mat-form-field>
+            <mat-label>Points</mat-label>
+            <input matInput type="text" lmNumericInput [(ngModel)]="score" />
+        </mat-form-field>
+    </div>
+    <div flexLayout="row wrap" fxLayoutGap="0.4em">
+        <ng-container *ngFor="let teamScore of teamScores">
+            <div fxFlex class="form-group">
+                <button type="button" mat-raised-button color="accent" (click)="onAddTeamScore(teamScore)">Add to
+                    {{teamScore.team.name}}</button>
+            </div>
+        </ng-container>
+        <div fxFlex="1 1"></div>
+    </div>
+</div>

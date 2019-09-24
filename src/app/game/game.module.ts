@@ -19,14 +19,20 @@ import { GameRoundListComponent } from './components/game-round-list/game-round-
 import { WildCardIndicatorComponent } from './components/wild-card-indicator/wild-card-indicator.component';
 import { ScoreByRoundChartComponent } from './components/score-by-round-chart/score-by-round-chart.component';
 import { MaterialModule } from '../core/material.module';
+import { GameRoundDetailsComponent } from './components/game-round-details/game-round-details.component';
+import { GameAdHocDetailsComponent } from './components/game-ad-hoc-details/game-ad-hoc-details.component';
+import { AdHocScoreFormComponent } from './components/ad-hoc-score-form/ad-hoc-score-form.component';
 
 @NgModule({
   declarations: [
+    AdHocScoreFormComponent,
+    GameAdHocDetailsComponent,
     GameFormComponent,
     GameListComponent,
     GameHomeComponent,
     GameDetailsComponent,
     GameScoreSummaryComponent,
+    GameRoundDetailsComponent,
     GameRoundFormComponent,
     GameRoundListComponent,
     WildCardIndicatorComponent,

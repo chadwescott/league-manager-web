@@ -1,0 +1,29 @@
+<div fxFlex="1 1 30em" fxLayout="column" fxLayoutGap="0.4em" [@roundChanged]="selectedRound?.number">
+    <div *ngIf="selectedRound" lmPadded lmCardPanelContent>
+        <lm-wild-card-indicator [wildCard]="wildCard"></lm-wild-card-indicator>
+    </div>
+    <div [@roundChanged]="selectedRound?.number" fxFlex lmCardPanelContent>
+        <lm-game-round-list [game]="game" [roundLabel]="roundLabel" [rounds]="rounds" (addRound)="onAddRound()"
+            (editRound)="onEditRound($event)" (deleteRound)="onDeleteRound($event)">
+        </lm-game-round-list>
+    </div>
+</div>
+<div fxFlex="1 1 50em" fxLayout="column" fxLayoutGap="0.4em">
+    <div fxFlex [@roundChanged]="selectedRound?.number" lmPadded lmCardPanelContent *ngIf="selectedRound">
+        <lm-game-round-form [roundLabel]="roundLabel" [round]="selectedRound" (scoreChanged)="onScoreChanged()"
+            (scoreEntered)="onAddRound()" (loadFirstRound)="onFirstRound()" (loadNextRound)="onNextRound()"
+            (loadPreviousRound)="onPreviousRound()" (loadLastRound)="onLastRound()">
+        </lm-game-round-form>
+        <lm-paginator [firstDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[0]"
+            [previousDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[0]"
+            [nextDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[rounds.length - 1]"
+            [lastDisabled]="!rounds || rounds.length == 0 || selectedRound === rounds[rounds.length - 1]"
+            (first)="onFirstRound()" (previous)="onPreviousRound()" (next)="onNextRound()" (last)="onLastRound()">
+        </lm-paginator>
+    </div>
+    <div fxFlex [@roundChanged]="selectedRound?.number" fxFlex lmCardPanelContent *ngIf="selectedRound"
+        style="height: 20rem;">
+        <lm-score-by-round-chart [roundLabel]="roundLabel" [rounds]="rounds">
+        </lm-score-by-round-chart>
+    </div>
+</div>

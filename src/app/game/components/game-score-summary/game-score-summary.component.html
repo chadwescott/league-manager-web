@@ -6,7 +6,7 @@
   <ng-container matColumnDef="score">
     <th mat-header-cell *matHeaderCellDef>Score</th>
     <td mat-cell class="header" *matCellDef="let teamScore" [class.negative]="teamScore.score < 0">
-      <span [@scoreChanged]="teamScore.score" (@scoreChanged.start)="onScoreChangedStart()">{{teamScore.score}}</span>
+      <span [@scoreChanged]="teamScore.score">{{teamScore.score}}</span>
     </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -19,18 +19,6 @@ import { FADE_IN_OUT_TIMING } from 'src/app/core/constants/timings';
   templateUrl: './game-details.component.html',
   styleUrls: ['./game-details.component.scss'],
   animations: [
-    trigger('roundChanged', [
-      transition(':enter', [
-        useAnimation(FADE_IN_ANIMATION, {
-          params: { timings: FADE_IN_OUT_TIMING }
-        })
-      ]),
-      transition(':leave', [
-        useAnimation(FADE_OUT_ANIMATION, {
-          params: { timings: FADE_IN_OUT_TIMING }
-        })
-      ])
-    ]),
     trigger('gameChanged', [
       transition(':enter', [
         useAnimation(FADE_IN_ANIMATION, {
@@ -49,16 +37,9 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   @ViewChild(GameRoundListComponent, { static: false }) gameRoundList: GameRoundListComponent;
   @ViewChild(ScoreByRoundChartComponent, { static: false }) scoreByRoundChart: ScoreByRoundChartComponent;
 
-  roundLabel = 'Hand';
   game: Game;
-  teams: Team[];
-  rounds: Round[];
-  wildCard: string;
-  selectedRound: Round;
 
   ScoreSystem = ScoreSystem;
-
-  private cards: string[] = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 
   private _routeParams$: Subscription;
   private _loadGame$: Subscription;
@@ -85,82 +66,10 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
         return;
       }
       this.game = game;
-      this.teams = game.teamScores.map(ts => ts.team);
-      this.updateRounds();
     });
-  }
-
-  onAddRound(): void {
-    this._gameService.createRound(this.game).subscribe(x => {
-      this.selectedRound = x;
-      this.updateRounds();
-      this.gameRoundList.scrollToBottom();
-    });
-  }
-
-  private updateRounds(): void {
-    this._gameService.getGameRounds(this.game.id).subscribe(rounds => {
-      this.rounds = rounds;
-
-      if (this.rounds && this.rounds.length > 0 && !this.selectedRound) {
-        this.selectedRound = this.rounds[this.rounds.length - 1];
-      }
-      this.updateWildCard();
-      if (this.gameRoundList) { this.gameRoundList.updateRounds(); }
-      if (this.scoreByRoundChart) { this.scoreByRoundChart.initializeChartData(); }
-    });
-  }
-
-  onScoreChanged() {
-    this._gameService.updateGameScores(this.game);
-    if (this.scoreByRoundChart) { this.scoreByRoundChart.initializeChartData(); }
-  }
-
-  onEditRound(round: Round): void {
-    this.selectedRound = round;
-  }
-
-  onDeleteRound(round: Round): void {
-    if (this.selectedRound === round) { this.selectedRound = null; }
-    this._gameService.deleteRound(round).subscribe(() => this.updateRounds());
-  }
-
-  private updateWildCard(): void {
-    this.wildCard = this.cards[(this.rounds.length - 1) % this.cards.length];
   }
 
   onClose(): void {
     this._routerService.showGames();
   }
-
-  onFirstRound(): void {
-    if (this.rounds && this.rounds.length > 0) {
-      this.selectedRound = this.rounds[0];
-    }
-  }
-
-  onPreviousRound(): void {
-    if (this.rounds && this.rounds.length > 0) {
-      const index = this.rounds.indexOf(this.selectedRound);
-      if (index > 0) {
-        this.selectedRound = this.rounds[index - 1];
-      }
-    }
-  }
-
-  onNextRound(): void {
-    if (this.rounds && this.rounds.length > 0) {
-      const index = this.rounds.indexOf(this.selectedRound);
-      if (index < this.rounds.length - 1) {
-        this.selectedRound = this.rounds[index + 1];
-      }
-    }
-  }
-
-  onLastRound(): void {
-    if (this.rounds && this.rounds.length > 0) {
-      this.selectedRound = this.rounds[this.rounds.length - 1];
-    }
-  }
-
 }
