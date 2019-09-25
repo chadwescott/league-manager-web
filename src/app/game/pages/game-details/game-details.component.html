@@ -1,29 +1,31 @@
 <lm-page-layout>
-    <div lmCardPanel>
-        <div lmCardPanelTitle>
-            <div fxLayout="row">
-                <div fxFlex="1 1">
-                    Game {{game?.number}}
+    <ng-container *ngIf="game">
+        <div lmCardPanel>
+            <div lmCardPanelTitle>
+                <div fxLayout="row">
+                    <div fxFlex="1 1">
+                        Game {{game?.number}}
+                    </div>
+                    <div fxFlex>
+                        <button mat-icon-button aria-label="Close" (click)="onClose()">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
                 </div>
-                <div fxFlex>
-                    <button mat-icon-button aria-label="Close" (click)="onClose()">
-                        <mat-icon>close</mat-icon>
-                    </button>
+            </div>
+            <div lmCardPanelBody>
+                <div fxLayout="row wrap" fxLayoutGap="0.4em">
+                    <div lmCardPanelContent fxFlex="1 1 30em" [@gameChanged]="game">
+                        <lm-game-score-summary [teamScores]="game?.teamScores"></lm-game-score-summary>
+                    </div>
+                    <ng-container *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.AdHoc">
+                        <lm-game-ad-hoc-details [game]="game"></lm-game-ad-hoc-details>
+                    </ng-container>
+                    <ng-container *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.Rounds">
+                        <lm-game-round-details [game]="game"></lm-game-round-details>
+                    </ng-container>
                 </div>
             </div>
         </div>
-        <div lmCardPanelBody>
-            <div fxLayout="row wrap" fxLayoutGap="0.4em">
-                <div lmCardPanelContent fxFlex="1 1 30em" [@gameChanged]="game">
-                    <lm-game-score-summary [teamScores]="game.teamScores"></lm-game-score-summary>
-                </div>
-                <ng-container *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.AdHoc">
-                    <lm-game-ad-hoc-details [game]="game"></lm-game-ad-hoc-details>
-                </ng-container>
-                <ng-container *ngIf="game?.gameSettings?.scoreSystem === ScoreSystem.Rounds">
-                    <lm-game-round-details [game]="game"></lm-game-round-details>
-                </ng-container>
-            </div>
-        </div>
-    </div>
+    </ng-container>
 </lm-page-layout>

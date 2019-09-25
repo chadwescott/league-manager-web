@@ -7,13 +7,11 @@ import { HttpService } from '../core/services/http.service';
 import { Game } from '../core/models/game';
 import { Round } from '../core/models/round';
 import { TeamRoundScore } from '../core/models/team-round-score';
-import { Team } from '../core/models/teams';
 import { TeamScoreEvent } from '../core/models/team-score-event';
-import { TeamScore } from '../core/models/team-score';
-import { GameSettings } from '../core/models/game-settings';
+import { GameTeamScore } from '../core/models/game-team-score';
 import { ScoreSystem } from '../core/enums/score-system';
-import { WinCondition } from '../core/enums/win-condition';
 import { GameRequest } from '../core/requests/game-request';
+import { Team } from '../core/models/teams';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +21,7 @@ export class GameService {
   private _games: Game[] = [];
   private _gameRounds: { [gameId: string]: Round[]; } = {};
   private _gameScores: { [gameId: string]: TeamScoreEvent[]; } = {};
-  private _gameNumber = 0;
   private _separator = '_';
-  // private _gameSettings: GameSettings = new GameSettings(2, 5, ScoreSystem.Rounds, WinCondition.ScoreLimit);
-  private _gameSettings: GameSettings = new GameSettings(2, 5, ScoreSystem.AdHoc, WinCondition.ScoreLimit);
 
   constructor(private _httpService: HttpService, private _envService: EnvService) {
     this._baseUrl = this._envService.apiUrl;
@@ -37,11 +32,10 @@ export class GameService {
   }
 
   public getGameById(id: string): Observable<Game> {
-    return of(this._games.find(x => x.id === id));
+    return this._httpService.get<Game>(`${this._baseUrl}/games/${id}`);
   }
 
-  public createGame(game: Game): Observable<any> {
-    const request = new GameRequest(game);
+  public createGame(request: GameRequest): Observable<any> {
     return this._httpService.post<Game>(`${this._baseUrl}/games`, request);
   }
 
@@ -56,6 +50,14 @@ export class GameService {
     if (index < 0) { return; }
     this._games[index] = game;
     return of(game);
+  }
+
+  public getGameTeams(id: string): Observable<Team[]> {
+    return this._httpService.get<Team[]>(`${this._baseUrl}/games/${id}/teams`);
+  }
+
+  public getGameTeamScores(id: string): Observable<GameTeamScore[]> {
+    return this._httpService.get<GameTeamScore[]>(`${this._baseUrl}/games/${id}/teamScores`);
   }
 
   public getGameRounds(id: string): Observable<Round[]> {
@@ -73,19 +75,7 @@ export class GameService {
   }
 
   public createRound(game: Game): Observable<Round> {
-    if (this._gameRounds[game.id] == null) {
-      this._gameRounds[game.id] = [];
-    }
-
-    const roundNumber = this._gameRounds[game.id].length + 1;
-    const id = `${game.id}${this._separator}${roundNumber}`;
-    const gameRound = new Round(id, game.id, roundNumber);
-    gameRound.teamScores = game.teamScores.map((teamScore, index) =>
-      new TeamRoundScore(`${id}${this._separator}${index}`, teamScore.team, 0));
-
-    this._gameRounds[game.id].push(gameRound);
-
-    return of(gameRound);
+    return null;
   }
 
   public updateGameScores(game: Game): void {
@@ -95,32 +85,9 @@ export class GameService {
   }
 
   private updateGameScoresByRound(game: Game) {
-    const rounds = this._gameRounds[game.id];
-    const teamScores = game.teamScores.map(x => new TeamScore(x.id, game.id, x.team));
-
-    for (let i = 0; i < rounds.length; i++) {
-      for (let j = 0; j < rounds[i].teamScores.length; j++) {
-        teamScores[j].score += Number(rounds[i].teamScores[j].score);
-      }
-    }
-
-    for (let i = 0; i < teamScores.length; i++) {
-      game.teamScores[i].score = teamScores[i].score;
-    }
   }
 
   private updateGameScoresAdHoc(game: Game) {
-    const scores = this._gameScores[game.id];
-    const teamScores = game.teamScores.map(x => new TeamScore(x.id, game.id, x.team));
-
-    for (let i = 0; i < scores.length; i++) {
-      const teamScore = teamScores.find(x => x.team === scores[i].team);
-      teamScore.score += scores[i].score;
-    }
-
-    for (let i = 0; i < teamScores.length; i++) {
-      game.teamScores[i].score = teamScores[i].score;
-    }
   }
 
   public deleteRound(gameRound: Round): Observable<boolean> {

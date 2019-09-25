@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TeamScore } from 'src/app/core/models/team-score';
+import { GameTeamScore } from 'src/app/core/models/game-team-score';
 import { trigger, transition, animate, style } from '@angular/animations';
 import { SCALE_IN_OUT_TIMING } from 'src/app/core/constants/timings';
 
@@ -19,7 +19,7 @@ import { SCALE_IN_OUT_TIMING } from 'src/app/core/constants/timings';
   ]
 })
 export class GameScoreSummaryComponent implements OnInit {
-  @Input() teamScores: TeamScore[];
+  @Input() teamScores: GameTeamScore[];
 
   displayedColumns: string[] = ['team', 'score'];
 

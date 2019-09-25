@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { TeamScore } from 'src/app/core/models/team-score';
+import { GameTeamScore } from 'src/app/core/models/game-team-score';
 import { TeamScoreEvent } from 'src/app/core/models/team-score-event';
 
 @Component({
@@ -8,7 +8,7 @@ import { TeamScoreEvent } from 'src/app/core/models/team-score-event';
   styleUrls: ['./ad-hoc-score-form.component.scss']
 })
 export class AdHocScoreFormComponent implements OnInit {
-  @Input() teamScores: TeamScore[];
+  @Input() teamScores: GameTeamScore[];
   @Output() teamScore = new EventEmitter<TeamScoreEvent>();
 
   score = 0;
@@ -18,7 +18,7 @@ export class AdHocScoreFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  onAddTeamScore(teamScore: TeamScore) {
+  onAddTeamScore(teamScore: GameTeamScore) {
     const event = new TeamScoreEvent(teamScore.team, this.score, new Date(Date.now()));
     this.teamScore.emit(event);
     this.score = 0;

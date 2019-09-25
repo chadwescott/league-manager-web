@@ -8,6 +8,7 @@ import { RouterService } from 'src/app/routing/services/router-service/router.se
 import { GameSettings } from 'src/app/core/models/game-settings';
 import { ScoreSystem } from 'src/app/core/enums/score-system';
 import { WinCondition } from 'src/app/core/enums/win-condition';
+import { GameRequest } from 'src/app/core/requests/game-request';
 
 @Component({
   selector: 'lm-game-home',
@@ -43,9 +44,9 @@ export class GameHomeComponent implements OnInit, OnDestroy {
     this._routerService.showGame(game.id);
   }
 
-  saveGame(game: Game) {
+  saveGame(request: GameRequest) {
     console.log('saving game...');
-    const createGame$ = this._gameService.createGame(game).subscribe(x => {
+    const createGame$ = this._gameService.createGame(request).subscribe(x => {
       console.log('game saved');
       this.showForm = false;
       createGame$.unsubscribe();
