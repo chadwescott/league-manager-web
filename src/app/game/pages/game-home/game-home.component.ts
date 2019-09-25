@@ -44,10 +44,12 @@ export class GameHomeComponent implements OnInit, OnDestroy {
   }
 
   saveGame(game: Game) {
+    console.log('saving game...');
     const createGame$ = this._gameService.createGame(game).subscribe(x => {
+      console.log('game saved');
       this.showForm = false;
+      createGame$.unsubscribe();
     });
-    createGame$.unsubscribe();
   }
 
   onCreateGameCancelled() {

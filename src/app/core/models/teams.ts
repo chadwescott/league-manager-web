@@ -5,7 +5,6 @@ export class Team {
 
     constructor(
         public id: string,
-        public name: string,
-        public teamNumber: number
+        public name: string
     ) { }
 }

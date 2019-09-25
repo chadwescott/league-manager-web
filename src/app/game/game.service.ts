@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+
+import { EnvService } from '../core/services/env.service';
+import { HttpService } from '../core/services/http.service';
+
 import { Game } from '../core/models/game';
 import { Round } from '../core/models/round';
 import { TeamRoundScore } from '../core/models/team-round-score';
 import { Team } from '../core/models/teams';
+import { TeamScoreEvent } from '../core/models/team-score-event';
 import { TeamScore } from '../core/models/team-score';
 import { GameSettings } from '../core/models/game-settings';
 import { ScoreSystem } from '../core/enums/score-system';
 import { WinCondition } from '../core/enums/win-condition';
-import { TeamScoreEvent } from '../core/models/team-score-event';
+import { GameRequest } from '../core/requests/game-request';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  private _team1 = new Team('1', 'Chad', 1);
-  private _team2 = new Team('2', 'Nancy', 2);
+  private _baseUrl: string;
   private _games: Game[] = [];
   private _gameRounds: { [gameId: string]: Round[]; } = {};
   private _gameScores: { [gameId: string]: TeamScoreEvent[]; } = {};
@@ -24,31 +28,21 @@ export class GameService {
   // private _gameSettings: GameSettings = new GameSettings(2, 5, ScoreSystem.Rounds, WinCondition.ScoreLimit);
   private _gameSettings: GameSettings = new GameSettings(2, 5, ScoreSystem.AdHoc, WinCondition.ScoreLimit);
 
-  constructor() {
-    const game = new Game('1', 1,
-      [
-        new TeamScore('1', '1', this._team1),
-        new TeamScore('2', '2', this._team2)
-      ],
-      new Date(Date.now()),
-      this._gameSettings);
-    this.createGame(game);
+  constructor(private _httpService: HttpService, private _envService: EnvService) {
+    this._baseUrl = this._envService.apiUrl;
   }
 
   public getGames(): Observable<Game[]> {
-    return of(this._games);
+    return this._httpService.get<Game[]>(`${this._baseUrl}/games`);
   }
 
   public getGameById(id: string): Observable<Game> {
     return of(this._games.find(x => x.id === id));
   }
 
-  public createGame(game: Game): Observable<Game> {
-    game.number = ++this._gameNumber;
-    game.id = game.number.toString();
-    this._games.push(game);
-    this.createRound(game);
-    return of(game);
+  public createGame(game: Game): Observable<any> {
+    const request = new GameRequest(game);
+    return this._httpService.post<Game>(`${this._baseUrl}/games`, request);
   }
 
   public deleteGame(game: Game): void {

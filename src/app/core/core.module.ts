@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material.module';
 import { RoutingModule } from '../routing/routing.module';
 
@@ -21,6 +22,9 @@ import { SectionHeaderDirective } from './directives/section-header.directive';
 import { CardPanelBodyDirective } from './directives/card-panel-body.directive';
 import { CardPanelContentDirective } from './directives/card-panel-content.directive';
 
+// Providers
+import { EnvServiceProvider } from './services/env.service.provider';
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -39,6 +43,7 @@ import { CardPanelContentDirective } from './directives/card-panel-content.direc
   imports: [
     CommonModule,
     FlexLayoutModule,
+    HttpClientModule,
     MaterialModule,
     RoutingModule
   ],
@@ -57,6 +62,9 @@ import { CardPanelContentDirective } from './directives/card-panel-content.direc
     NumericInputDirective,
     PaddedDirective,
     SectionHeaderDirective
+  ],
+  providers: [
+    EnvServiceProvider
   ]
 })
 export class CoreModule { }
