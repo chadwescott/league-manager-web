@@ -1,0 +1,189 @@
+@import "./variables.scss";
+@include angular-material-theme($theme);
+
+* {
+  font-family: Roboto, "Helvetica Neue", sans-serif, "FoundrySterling-Book", Arial;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: whitesmoke;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 1.0em;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $primary-contrast-color;
+  box-shadow: inset 0 0 0.6em $darker-primary-color; 
+  border: solid 0.05em black;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $accent-color; 
+  box-shadow: inset 0 0 0.6em $accent-contrast-color; 
+  border: solid 0.05em black;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $darker-accent-color;
+}
+
+.scrollable {
+  // min-height: 0;
+  max-height: 26em;
+  overflow: auto;
+}
+
+.page-title {
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.card-panel {
+  @extend .mat-elevation-z6;
+  border: outset 0.25em $primary-color;
+  border-radius: 0.2em;
+  padding: 0.2em 0.4em 0.4em 0.4em;
+  background-color: $primary-color;
+  margin-bottom: 0.8em;
+}
+
+.small-card-panel {
+  @extend .card-panel;
+  width: 25em;
+}
+
+.card-panel-title {
+  height: 1.2em;
+  font-weight: bold;
+  font-size: large;
+  padding: 0 0.2em 0.2em 0.2em;
+  color: $primary-contrast-color;
+}
+
+.card-panel-title .mat-icon-button {
+  height: 2.0em;
+  width: 2.0em;
+  line-height: 2.0em;
+  margin-top: -1em;
+
+  .mat-icon {
+    font-size: 1.4em;
+    height: 1.4em;
+    width: 1.4em;
+    line-height: 1.4em;
+  }
+}
+
+.padded {
+  padding: 0.5em;
+}
+
+.card-panel-body .card-panel-content {
+  border: inset 0.25em $primary-color;
+  background-color: $content-color;
+  // box-shadow: inset 0 0 0.6em $darker-primary-color; 
+}
+
+.mat-header-cell .mat-icon-button {
+  height: 2.0em;
+  width: 2.0em;
+  line-height: 2.0em;
+  color: $accent-color;
+
+  .mat-icon {
+    font-size: 1.4em;
+    height: 1.4em;
+    width: 1.4em;
+    line-height: 1.4em;  }
+}
+
+.mat-cell .mat-icon-button {
+  height: 2.0em;
+  width: 2.0em;
+  line-height: 2.0em;
+  color: $accent-color;
+
+  .mat-icon {
+    font-size: 1.4em;
+    height: 1.4em;
+    width: 1.4em;
+    line-height: 1.4em;  }}
+
+div .section {
+  padding-bottom: 0.5em;
+}
+
+.section-header {
+  font-size: large;
+  font-weight: 600;
+  padding-bottom: 0.2em;
+}
+
+tr.mat-header-row,
+tr.mat-footer-row,
+tr.mat-row {
+  height: 2.2em;
+}
+
+.mat-table {
+  width: 100%;
+  background-color: $content-color;
+}
+
+.error {
+  color: $error-color;
+  padding-top: 0.5em;
+}
+
+.negative {
+  color: red;
+}
+
+// material icons
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url("~/assets/material-icons/MaterialIcons-Regular.eot"); /* For IE6-8 */
+  src: local("Material Icons"), local("MaterialIcons-Regular"),
+    url("~/assets/material-icons/MaterialIcons-Regular.woff2") format("woff2"),
+    url("~/assets/material-icons/MaterialIcons-Regular.woff") format("woff"),
+    url("~/assets/material-icons/MaterialIcons-Regular.ttf") format("truetype");
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: "liga";
+}

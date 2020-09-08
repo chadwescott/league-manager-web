@@ -1,0 +1,56 @@
+@import "~@angular/material/theming";
+@include mat-core();
+$primary: mat-palette($mat-indigo, 600);
+$accent: mat-palette($mat-light-blue, 600);
+// $primary: mat-palette($mat-light-blue);
+// $accent: mat-palette($mat-cyan, A400);
+// $primary: mat-palette($mat-red);
+// $accent: mat-palette($mat-orange);
+// $primary: mat-palette($mat-pink);
+// $accent: mat-palette($mat-purple);
+$warn: mat-palette($mat-red);
+$theme: mat-light-theme($primary, $accent, $warn);
+
+$darker-primary-color: mat-color($primary, darker);
+$lighter-primary-color: mat-color($primary, lighter);
+
+$darker-accent-color: mat-color($accent, darker);
+$lighter-accent-color: mat-color($accent, lighter);
+
+$primary-color: mat-color($primary);
+$accent-color: mat-color($accent);
+$warn-color: mat-color($warn);
+
+$primary-contrast-color: mat-color($primary, default-contrast);
+$accent-contrast-color: mat-color($accent, default-contrast);
+
+$cv-orange: #f58025;
+$cv-blue: #005cab;
+$cv-green: #2d9a43;
+$cv-purple: #6c2196;
+$cv-aqua: #00b9d2;
+$cv-magenta: #e1134f;
+
+$error-color: red;
+$warn-color: gold;
+$ready-color: green;
+$disabled-color: gray;
+
+$content-color: mat-color($mat-yellow, 100);
+// $content-color: white;
+
+$default-padding: 8px;
+
+$metallic-silver-background: linear-gradient(to right bottom, gainsboro, white 60%, gainsboro 80%, silver);
+$metallic-gold-background: linear-gradient(to right bottom, goldenrod, lightyellow 60%, goldenrod 80%, gold);
+
+$metallic-background: $metallic-silver-background;
+
+$border-style: solid 2px;
+
+$metallic-border: gray $border-style;
+$primary-border: $primary-color $border-style;
+$accent-border: $accent-color $border-style;
+
+$icon-font-size: 24px;
+$button-icon-font-size: 16px;
