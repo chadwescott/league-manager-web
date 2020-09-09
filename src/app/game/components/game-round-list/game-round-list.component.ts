@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, AfterViewInit, ElementRef } from '@angular/core';
 import { Round } from 'src/app/core/models/round';
-import { MatTable } from '@angular/material';
+import { MatTable } from '@angular/material/table';
 import { Game } from 'src/app/core/models/game';
 import { Team } from 'src/app/core/models/teams';
 import { trigger, transition, useAnimation, query, animate, style } from '@angular/animations';

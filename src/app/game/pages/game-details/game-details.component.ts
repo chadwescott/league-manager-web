@@ -34,8 +34,8 @@ import { FADE_IN_OUT_TIMING } from 'src/app/core/constants/timings';
   ]
 })
 export class GameDetailsComponent implements OnInit, OnDestroy {
-  @ViewChild(GameRoundListComponent, { static: false }) gameRoundList: GameRoundListComponent;
-  @ViewChild(ScoreByRoundChartComponent, { static: false }) scoreByRoundChart: ScoreByRoundChartComponent;
+  @ViewChild(GameRoundListComponent) gameRoundList: GameRoundListComponent;
+  @ViewChild(ScoreByRoundChartComponent) scoreByRoundChart: ScoreByRoundChartComponent;
 
   game: Game;
 

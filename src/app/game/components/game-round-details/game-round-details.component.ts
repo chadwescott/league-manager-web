@@ -44,8 +44,8 @@ export class GameRoundDetailsComponent implements OnInit {
   @Input() game: Game;
   @Input() rounds: Round[];
 
-  @ViewChild(GameRoundListComponent, { static: false }) gameRoundList: GameRoundListComponent;
-  @ViewChild(ScoreByRoundChartComponent, { static: false }) scoreByRoundChart: ScoreByRoundChartComponent;
+  @ViewChild(GameRoundListComponent) gameRoundList: GameRoundListComponent;
+  @ViewChild(ScoreByRoundChartComponent) scoreByRoundChart: ScoreByRoundChartComponent;
 
   teams: Team[];
   wildCard: string;
